@@ -43,7 +43,6 @@ public class FileHandler {
     
     //loads all the files from the main menu
     public void loadAllFiles(Map map) throws NullPointerException{
-        Scanner input = new Scanner(System.in);
         
         try{
             this.mapFile = new File(this.fileName + ".map.txt");

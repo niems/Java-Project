@@ -19,9 +19,6 @@ public class Menu {
     public void mainMenu(Map map) {
        Scanner input = new Scanner(System.in);
        String selection;
-       
-       
-       //JOptionPane.showMessageDialog(null, "Our Info", "About Us", JOptionPane.PLAIN_MESSAGE);
        boolean again; //if true, it loops again
        
        do{ //menu loop. Breaking out of this means the user has quit

@@ -24,6 +24,8 @@ import javax.swing.JTextArea;
  */
 public class MenuFrame extends JFrame implements ActionListener{
     
+    private static Map map; 
+    
     private final JMenuBar menuBar;
     private JMenuItem menuItem; //used for all menu items
     
@@ -74,8 +76,11 @@ public class MenuFrame extends JFrame implements ActionListener{
         MenuFrame.this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         MenuFrame.this.getContentPane().setBackground(Color.WHITE);
         
+        //creates the map and file handler to load in system files
+        map = new Map();
+        //map.file = new FileHandler(map);
 
-        //Creates teh menubar to hold the menus and items
+        //Creates the menubar to hold the menus and items
         menuBar = new JMenuBar();
         
         //Creates the file menu
@@ -214,7 +219,9 @@ public class MenuFrame extends JFrame implements ActionListener{
     
     /********FILE MENU**********/
     public void open(){
-        
+        String tag = JOptionPane.showInputDialog("Enter file tag: "); //gets file tag from user
+        MenuFrame.map.file = new FileHandler(map, tag); 
+        MenuFrame.map.file.loadAllFiles(MenuFrame.map);
     }
     
     public void close(){
@@ -289,7 +296,7 @@ public class MenuFrame extends JFrame implements ActionListener{
     
     /*********ABOUT***************/
     public void about(){
-        String about = "Byte Me\nCSE 1325-002\nApril 17,2015\n\nName: Cam Nguyen\nID: 1000952534\n\nName: Pauline Nguyen\n ID: ?\n\nName: Zach Niemann\nID: 1000625866\n\n";
+        String about = "Byte Me\nCSE 1325-002\nApril 17,2015\n\nName: Cam Nguyen\nID: 1000952534\n\nName: Pauline Nguyen\n ID: 1000781109\n\nName: Zach Niemann\nID: 1000625866\n\n";
         JOptionPane.showMessageDialog(null, about, "About Us", JOptionPane.PLAIN_MESSAGE);
     }
 }
