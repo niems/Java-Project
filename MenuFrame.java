@@ -214,7 +214,7 @@ public class MenuFrame extends JFrame implements ActionListener{
     
     /********FILE MENU**********/
     public void open(){
-        String tag = JOptionPane.showInputDialog("Enter file tag: ");
+        
     }
     
     public void close(){
