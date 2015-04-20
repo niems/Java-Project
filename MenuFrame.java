@@ -32,9 +32,7 @@ public class MenuFrame extends JFrame implements ActionListener{
     private final JMenu menuPort;
     private final JMenu menuMonster;
     
-    
     private final JMenuItem menuitemAbout;
-
     private final JTextArea messageBox;
     
     // Constants defining the file menu name and items
@@ -153,6 +151,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         {
             case commandOpen:
                 System.out.println("open");
+                open();
                 break;
             case commandClose:
                 System.out.println("close");
@@ -164,7 +163,7 @@ public class MenuFrame extends JFrame implements ActionListener{
                 System.exit(0);
                 break;
             case commandGenerateShips:
-                createShip();
+                generateShips();
                 System.out.println("generate ships");
                 break;
             case commandUpdateShips:
@@ -216,12 +215,74 @@ public class MenuFrame extends JFrame implements ActionListener{
         }
     }
     
+    /********FILE MENU**********/
+    public void open(){
+        JOptionPane.showInputDialog("Enter the file tag: ");
+    }
     
-    public void createShip()
+    public void close(){
+        
+    }
+    
+    public void snapshot(){
+        
+    }
+    
+    
+    /********SHIP MENU**********/
+    public void generateShips()
     {
         GenerateShipsBox gsb = new GenerateShipsBox();
         gsb.setSize(new Dimension(500,150));
         gsb.setVisible(true);        
+        
+    }
+    
+    public void updateShips(){
+        
+    }
+    
+    public void displayAllShips(){
+        
+    }
+    
+    public void removeAllShips(){
+        
+    }
+    
+    
+    /********PORT MENU**********/
+    public void unloadShip(){
+        
+    }
+    
+    public void updateDock(){
+        
+    }
+    
+    public void displayAllDocks(){
+        
+    }
+    
+    public void displayAllCargos(){
+        
+    }
+    
+    
+    /********MONSTER MENU**********/
+    public void generateMonsters(){
+        
+    }
+    
+    public void updateMonsters(){
+        
+    }
+    
+    public void displayAllMonsters(){
+        
+    }
+    
+    public void summonGodzilla(){
         
     }
 }
