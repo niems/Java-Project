@@ -122,7 +122,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         
         menuitemAbout=new JMenuItem(commandAbout);
         menuitemAbout.addActionListener(MenuFrame.this);
-                
+        //        
         // Add the menus onto the menubar and the about button
         menuBar.add(fileMenu);
         menuBar.add(menuShip);
