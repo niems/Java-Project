@@ -32,9 +32,10 @@ public class MenuFrame extends JFrame implements ActionListener{
     private final JMenu menuPort;
     private final JMenu menuMonster;
     
+    
     private final JMenuItem menuitemAbout;
 
-    private JTextArea messageBox;
+    private final JTextArea messageBox;
     
     // Constants defining the file menu name and items
     public final static String labelFile = "File";
@@ -67,22 +68,15 @@ public class MenuFrame extends JFrame implements ActionListener{
     
     public final static String commandAbout = "About";
     
-    //used to create the menu items for the menu passed
-    public final void createMenuItems(String[] items, JMenu menu){
-        for(int i = 0; i < items.length; i++){
-            this.menuItem = new JMenuItem(items[i]);
-            this.menuItem.addActionListener(MenuFrame.this);
-            menu.add(this.menuItem);
-        }
-    }
-    
     
     public MenuFrame()
     {
+        //Puts the group name on the window
+        super("Byte Me Project");
         MenuFrame.this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        MenuFrame.this.getContentPane().setBackground(Color.CYAN);
+        MenuFrame.this.getContentPane().setBackground(Color.WHITE);
         
-        
+
         //Creates teh menubar to hold the menus and items
         menuBar = new JMenuBar();
         
@@ -142,8 +136,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);//puts it in a scrollpane with a vertical scrollbar
         this.add(scrollbar,BorderLayout.SOUTH);
         
-        //Puts the group name on the window
-        this.setTitle("Byte Me Project");
+
         
         // Sets the size of the main window        
         Dimension size = new Dimension(800,600);
@@ -171,6 +164,7 @@ public class MenuFrame extends JFrame implements ActionListener{
                 System.exit(0);
                 break;
             case commandGenerateShips:
+                createShip();
                 System.out.println("generate ships");
                 break;
             case commandUpdateShips:
@@ -207,9 +201,27 @@ public class MenuFrame extends JFrame implements ActionListener{
                 System.out.println("summon godzilla");
                 break;
             case commandAbout:
-                String about = "Byte Me\nCSE 1325-002\nApril 17,2015\n\nName: Cam Nguyen\nID: ?\n\nName: Pauline Nguyen\n ID: ?\n\nName: Zach Niemann\nID: 1000625866\n\n";
+                String about = "Byte Me\nCSE 1325-002\nApril 17,2015\n\nName: Cam Nguyen\nID: 1000952534\n\nName: Pauline Nguyen\n ID: ?\n\nName: Zach Niemann\nID: 1000625866\n\n";
                 JOptionPane.showMessageDialog(null, about, "About Us", JOptionPane.PLAIN_MESSAGE);
                 break;
         }
+    }
+    
+    //used to create the menu items for the menu passed
+    public final void createMenuItems(String[] items, JMenu menu){
+        for(int i = 0; i < items.length; i++){
+            this.menuItem = new JMenuItem(items[i]);
+            this.menuItem.addActionListener(MenuFrame.this);
+            menu.add(this.menuItem);
+        }
+    }
+    
+    
+    public void createShip()
+    {
+        GenerateShipsBox gsb = new GenerateShipsBox();
+        gsb.setSize(new Dimension(500,150));
+        gsb.setVisible(true);        
+        
     }
 }
