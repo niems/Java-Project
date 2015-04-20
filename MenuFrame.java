@@ -150,58 +150,55 @@ public class MenuFrame extends JFrame implements ActionListener{
         switch(command)
         {
             case commandOpen:
-                System.out.println("open");
                 open();
                 break;
             case commandClose:
-                System.out.println("close");
+                close();
                 break;
             case commandSnapShot:
-                System.out.println("shap shot");
+                snapshot();
                 break;
             case commandExit:
                 System.exit(0);
                 break;
             case commandGenerateShips:
                 generateShips();
-                System.out.println("generate ships");
                 break;
             case commandUpdateShips:
-                System.out.println("update ships");
+                updateShips();
                 break;
             case commandDisplayAllShips:
-                System.out.println("display all ships");
+                displayAllShips();
                 break;
             case commandUnloadShip:
-                System.out.println("unload ship");
+                unloadShip();
                 break;
             case commandUpdateDock:
-                System.out.println("update dock");
+                updateDock();
                 break;
             case commandDisplayAllDocks:
-                System.out.println("display all docks");
+                displayAllDocks();
                 break;
             case commandDisplayAllCargo:
-                System.out.println("display all cargo");
+                displayAllCargo();
                 break;
             case commandGenerateMonsters:
-                System.out.println("generate monsters");
+                generateMonsters();
                 break;
             case commandUpdateMonsters:
-                System.out.println("update monsters");
+                updateMonsters();
                 break;
             case commandDisplayAllMonsters:
-                System.out.println("display all monsters");
+                displayAllMonsters();
                 break;
             case commandRemoveAllMonsters:
-                System.out.println("remove all monsters");
+                removeAllMonsters();
                 break;
             case commandSummonGodzilla:
-                System.out.println("summon godzilla");
+                summonGodzilla();
                 break;
             case commandAbout:
-                String about = "Byte Me\nCSE 1325-002\nApril 17,2015\n\nName: Cam Nguyen\nID: 1000952534\n\nName: Pauline Nguyen\n ID: ?\n\nName: Zach Niemann\nID: 1000625866\n\n";
-                JOptionPane.showMessageDialog(null, about, "About Us", JOptionPane.PLAIN_MESSAGE);
+                about();
                 break;
         }
     }
@@ -217,7 +214,7 @@ public class MenuFrame extends JFrame implements ActionListener{
     
     /********FILE MENU**********/
     public void open(){
-        JOptionPane.showInputDialog("Enter the file tag: ");
+        String tag = JOptionPane.showInputDialog("Enter file tag: ");
     }
     
     public void close(){
@@ -264,7 +261,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         
     }
     
-    public void displayAllCargos(){
+    public void displayAllCargo(){
         
     }
     
@@ -282,7 +279,17 @@ public class MenuFrame extends JFrame implements ActionListener{
         
     }
     
+    public void removeAllMonsters(){
+        
+    }
+    
     public void summonGodzilla(){
         
+    }
+    
+    /*********ABOUT***************/
+    public void about(){
+        String about = "Byte Me\nCSE 1325-002\nApril 17,2015\n\nName: Cam Nguyen\nID: 1000952534\n\nName: Pauline Nguyen\n ID: ?\n\nName: Zach Niemann\nID: 1000625866\n\n";
+        JOptionPane.showMessageDialog(null, about, "About Us", JOptionPane.PLAIN_MESSAGE);
     }
 }
