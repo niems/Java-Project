@@ -234,8 +234,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         MenuFrame.map.getCurrentShips().clear(); //erases all ships
         MenuFrame.map.getPort().getDock().clear(); //erases all docks
         MenuFrame.map.getPort().getCargo().clear(); //erases all cargo
-        
-        //erase all seamonsters
+        MenuFrame.map.getSeamonsters().clear(); //erases all seamonsters
     }
     
     public void snapshot(){

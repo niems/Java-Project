@@ -46,12 +46,14 @@ public class Map {
     private String[][] geoStatus; //land or sea 
     private String[][] currentMap; //includes ship and dock locations
     private ArrayList<CargoShip> currentShips; //current ships displayed on the map
+    private ArrayList<SeaMonster> seamonsters; //current seamonsters displayed on the map
     private Port port; //current port
    
     
     public Map() {
         this.port = new Port();
         this.currentShips = new ArrayList();
+        this.seamonsters = new ArrayList();
         this.file = null;
         this.menu = new Menu();
         this.water = '.';
@@ -577,6 +579,20 @@ public class Map {
      */
     public void setShipReadyToUnload(char shipReadyToUnload) {
         this.shipReadyToUnload = shipReadyToUnload;
+    }
+
+    /**
+     * @return the seamonsters
+     */
+    public ArrayList<SeaMonster> getSeamonsters() {
+        return seamonsters;
+    }
+
+    /**
+     * @param seamonsters the seamonsters to set
+     */
+    public void setSeamonsters(ArrayList<SeaMonster> seamonsters) {
+        this.seamonsters = seamonsters;
     }
     
 }
