@@ -225,16 +225,20 @@ public class MenuFrame extends JFrame implements ActionListener{
         MenuFrame.map.file = new FileHandler(map, tag); 
         MenuFrame.map.file.loadAllFiles(MenuFrame.map);
         
-        //update graphically
+        //update graphically here
         
     }
     
     public void close(){
+        
+        //removes all the info
         MenuFrame.map.setCurrentMap(null);
         MenuFrame.map.getCurrentShips().clear(); //erases all ships
         MenuFrame.map.getPort().getDock().clear(); //erases all docks
         MenuFrame.map.getPort().getCargo().clear(); //erases all cargo
         MenuFrame.map.getSeamonsters().clear(); //erases all seamonsters
+        
+        //update graphically here
     }
     
     public void snapshot(){
