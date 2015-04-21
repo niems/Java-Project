@@ -264,6 +264,18 @@ public class MenuFrame extends JFrame implements ActionListener{
     
     public void displayAllShips(){
         /*Show the current ships in the status message box at the bottom of the screen */
+        String output;
+        
+        if(MenuFrame.map.getCurrentShips().size() > 0){
+            for(int i = 0; i < MenuFrame.map.getCurrentShips().size(); i++){
+                output = MenuFrame.map.getCurrentShips().get(i).toString();
+                this.messageBox.append(output);
+            }
+        }
+        
+        else{
+            this.messageBox.append("No ships to display.\n");
+        }
     }
     
     public void removeAllShips(){
