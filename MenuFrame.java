@@ -298,7 +298,6 @@ public class MenuFrame extends JFrame implements ActionListener{
         else{
             this.messageBox.append("No docks to display\n");
         }
-        
     }
     
     public void displayAllCargo(){
@@ -317,7 +316,6 @@ public class MenuFrame extends JFrame implements ActionListener{
         else{
             this.messageBox.append("No cargo to display\n");
         }
-        
     }
     
     
