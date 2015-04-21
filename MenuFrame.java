@@ -218,7 +218,7 @@ public class MenuFrame extends JFrame implements ActionListener{
     }
     
     /********FILE MENU**********/
-    public void open(){
+    public void open(){ //loads the files
         
         //gets the info from the files
         String tag = JOptionPane.showInputDialog("Enter file tag: "); 
@@ -229,7 +229,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         
     }
     
-    public void close(){
+    public void close(){ //erases all map info
         
         //removes all the info
         MenuFrame.map.setCurrentMap(null);
@@ -242,7 +242,9 @@ public class MenuFrame extends JFrame implements ActionListener{
     }
     
     public void snapshot(){
-        
+        /*Opens a file dialog to prompt the user for a filename and directory,
+        then the program will write the current list of ships, docks, sea monsters, 
+        and cargos to a file using a comma separated value format.*/
     }
     
     
@@ -256,55 +258,66 @@ public class MenuFrame extends JFrame implements ActionListener{
     }
     
     public void updateShips(){
-        
+        /*Prompt the user with a dialog box with a list item containing the names
+        of all available ships. Once a ship has been slected, open a second dialog
+        box that will allow the user to update the current ship properties.*/
     }
     
     public void displayAllShips(){
-        
+        /*Show the current ships in the status message box at the bottom of the screen */
     }
     
     public void removeAllShips(){
-        
+        /*Remove all ships from the current map */
     }
     
     
     /********PORT MENU**********/
     public void unloadShip(){
-        
+        /*Prompt the user with a dialog box, showing a list of all the ships
+        safely in dock*/
     }
     
     public void updateDock(){
-        
+        /*Prompt the user with a dialog box with a list item contatining the names
+        of all avaialble docks. Once a dock has been selected, open a second dialog
+        box that will allow the user to update the current dock properties.*/
     }
     
     public void displayAllDocks(){
-        
+        /*Show the current docks in the status message box at the bottom of the screen.*/
     }
     
     public void displayAllCargo(){
-        
+        /*Shows the current cargos in the port in the status message at the bottom
+        of the screen.*/
     }
     
     
     /********MONSTER MENU**********/
     public void generateMonsters(){
-        
+        /*Prompts the user with a dialog box, and request a number of monsters
+        (sea serpents, leviathans, and krakens) to be generated. The monsters
+        will then be placed on the map in the sea.*/
     }
     
     public void updateMonsters(){
-        
+        /*Prompt the user with a dialog box with a list item contatining the current
+        monsters. Once a monster has been selected, open a second dialog box that will
+        allow the user to update the current monster properties*/
     }
     
     public void displayAllMonsters(){
-        
+        /*Show the current monsters in the status message at the bottom of the screen*/
     }
     
     public void removeAllMonsters(){
-        
+        /*Remove all monsters from the map*/
     }
     
     public void summonGodzilla(){
-        
+        /*Put Godzilla on the map. Prompt the user for the location of where Godzilla
+        would appear. Godzilla, being an amphibian, can be on either land or water.*/
     }
     
     /*********ABOUT***************/
