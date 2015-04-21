@@ -269,7 +269,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         if(MenuFrame.map.getCurrentShips().size() > 0){
             for(int i = 0; i < MenuFrame.map.getCurrentShips().size(); i++){
                 output = MenuFrame.map.getCurrentShips().get(i).toString();
-                this.messageBox.append(output);
+                this.messageBox.append(output); //
             }
         }
         
