@@ -10,7 +10,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -18,11 +20,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+
 /**
  *
  * @author Cam
  */
 public class MenuFrame extends JFrame implements ActionListener{
+    
+    private static Map map; 
     
     private final JMenuBar menuBar;
     private JMenuItem menuItem; //used for all menu items
@@ -32,9 +37,7 @@ public class MenuFrame extends JFrame implements ActionListener{
     private final JMenu menuPort;
     private final JMenu menuMonster;
     
-    
     private final JMenuItem menuitemAbout;
-
     private final JTextArea messageBox;
     
     // Constants defining the file menu name and items
@@ -68,15 +71,6 @@ public class MenuFrame extends JFrame implements ActionListener{
     
     public final static String commandAbout = "About";
     
-    //used to create the menu items for the menu passed
-    public final void createMenuItems(String[] items, JMenu menu){
-        for(int i = 0; i < items.length; i++){
-            this.menuItem = new JMenuItem(items[i]);
-            this.menuItem.addActionListener(MenuFrame.this);
-            menu.add(this.menuItem);
-        }
-    }
-    
     
     public MenuFrame()
     {
@@ -85,8 +79,11 @@ public class MenuFrame extends JFrame implements ActionListener{
         MenuFrame.this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         MenuFrame.this.getContentPane().setBackground(Color.WHITE);
         
+        //creates the map and file handler to load in system files
+        map = new Map();
+        //map.file = new FileHandler(map);
 
-        //Creates teh menubar to hold the menus and items
+        //Creates the menubar to hold the menus and items
         menuBar = new JMenuBar();
         
         //Creates the file menu
@@ -153,13 +150,6 @@ public class MenuFrame extends JFrame implements ActionListener{
         this.setVisible(true);
         
     }
-    public void createShip()
-    {
-        GenerateShipsBox gsb = new GenerateShipsBox();
-        gsb.setSize(new Dimension(500,150));
-        gsb.setVisible(true);        
-        
-    }
 
     public void actionPerformed(ActionEvent e)
     {
@@ -168,58 +158,181 @@ public class MenuFrame extends JFrame implements ActionListener{
         switch(command)
         {
             case commandOpen:
-                System.out.println("open");
+                open();
                 break;
             case commandClose:
-                System.out.println("close");
+                close();
                 break;
             case commandSnapShot:
-                System.out.println("shap shot");
+                snapshot();
                 break;
             case commandExit:
                 System.exit(0);
                 break;
             case commandGenerateShips:
-                createShip();
-                System.out.println("generate ships");
+                generateShips();
                 break;
             case commandUpdateShips:
-                System.out.println("update ships");
+                updateShips();
                 break;
             case commandDisplayAllShips:
-                System.out.println("display all ships");
+                displayAllShips();
                 break;
             case commandUnloadShip:
-                System.out.println("unload ship");
+                unloadShip();
                 break;
             case commandUpdateDock:
-                System.out.println("update dock");
+                updateDock();
                 break;
             case commandDisplayAllDocks:
-                System.out.println("display all docks");
+                displayAllDocks();
                 break;
             case commandDisplayAllCargo:
-                System.out.println("display all cargo");
+                displayAllCargo();
                 break;
             case commandGenerateMonsters:
-                System.out.println("generate monsters");
+                generateMonsters();
                 break;
             case commandUpdateMonsters:
-                System.out.println("update monsters");
+                updateMonsters();
                 break;
             case commandDisplayAllMonsters:
-                System.out.println("display all monsters");
+                displayAllMonsters();
                 break;
             case commandRemoveAllMonsters:
-                System.out.println("remove all monsters");
+                removeAllMonsters();
                 break;
             case commandSummonGodzilla:
-                System.out.println("summon godzilla");
+                summonGodzilla();
                 break;
             case commandAbout:
-                String about = "Byte Me\nCSE 1325-002\nApril 17,2015\n\nName: Cam Nguyen\nID: 1000952534\n\nName: Pauline Nguyen\n ID: ?\n\nName: Zach Niemann\nID: 1000625866\n\n";
-                JOptionPane.showMessageDialog(null, about, "About Us", JOptionPane.PLAIN_MESSAGE);
+                about();
                 break;
         }
+    }
+    
+    //used to create the menu items for the menu passed
+    public final void createMenuItems(String[] items, JMenu menu){
+        for(int i = 0; i < items.length; i++){
+            this.menuItem = new JMenuItem(items[i]);
+            this.menuItem.addActionListener(MenuFrame.this);
+            menu.add(this.menuItem);
+        }
+    }
+    
+    /********FILE MENU**********/
+    public void open(){ //loads the files
+        
+
+            //gets the info from the files
+            String tag = JOptionPane.showInputDialog("Enter file tag: "); 
+            MenuFrame.map.file = new FileHandler(map, tag); 
+            MenuFrame.map.file.loadAllFiles(MenuFrame.map);
+
+            String fileNotFound = "The file can not be found.\n Please check if the file is in the correct directory.";
+            JOptionPane.showMessageDialog(null, fileNotFound, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
+
+        
+        //update graphically here
+        
+    }
+    
+    public void close(){ //erases all map info
+        
+        //removes all the info
+        MenuFrame.map.setCurrentMap(null);
+        MenuFrame.map.getCurrentShips().clear(); //erases all ships
+        MenuFrame.map.getPort().getDock().clear(); //erases all docks
+        MenuFrame.map.getPort().getCargo().clear(); //erases all cargo
+        MenuFrame.map.getSeamonsters().clear(); //erases all seamonsters
+        
+        //update graphically here
+    }
+    
+    public void snapshot(){
+        /*Opens a file dialog to prompt the user for a filename and directory,
+        then the program will write the current list of ships, docks, sea monsters, 
+        and cargos to a file using a comma separated value format.*/
+    }
+    
+    
+    /********SHIP MENU**********/
+    public void generateShips()
+    {
+        GenerateShipsDialog gsd = new GenerateShipsDialog(this,MenuFrame.map);
+        gsd.setVisible(true);        
+    }
+    
+    public void updateShips(){
+        /*Prompt the user with a dialog box with a list item containing the names
+        of all available ships. Once a ship has been slected, open a second dialog
+        box that will allow the user to update the current ship properties.*/
+        UpdateShipsDialog usd = new UpdateShipsDialog(this,MenuFrame.map);
+        usd.setVisible(true);
+    }
+    
+    public void displayAllShips(){
+        /*Show the current ships in the status message box at the bottom of the screen */
+        JList shipList = new JList(MenuFrame.map.getCurrentShips().toArray());
+        
+    }
+    
+    public void removeAllShips(){
+        /*Remove all ships from the current map */
+    }
+    
+    
+    /********PORT MENU**********/
+    public void unloadShip(){
+        /*Prompt the user with a dialog box, showing a list of all the ships
+        safely in dock*/
+    }
+    
+    public void updateDock(){
+        /*Prompt the user with a dialog box with a list item contatining the names
+        of all avaialble docks. Once a dock has been selected, open a second dialog
+        box that will allow the user to update the current dock properties.*/
+    }
+    
+    public void displayAllDocks(){
+        /*Show the current docks in the status message box at the bottom of the screen.*/
+    }
+    
+    public void displayAllCargo(){
+        /*Shows the current cargos in the port in the status message at the bottom
+        of the screen.*/
+    }
+    
+    
+    /********MONSTER MENU**********/
+    public void generateMonsters(){
+        /*Prompts the user with a dialog box, and request a number of monsters
+        (sea serpents, leviathans, and krakens) to be generated. The monsters
+        will then be placed on the map in the sea.*/
+    }
+    
+    public void updateMonsters(){
+        /*Prompt the user with a dialog box with a list item contatining the current
+        monsters. Once a monster has been selected, open a second dialog box that will
+        allow the user to update the current monster properties*/
+    }
+    
+    public void displayAllMonsters(){
+        /*Show the current monsters in the status message at the bottom of the screen*/
+    }
+    
+    public void removeAllMonsters(){
+        /*Remove all monsters from the map*/
+    }
+    
+    public void summonGodzilla(){
+        /*Put Godzilla on the map. Prompt the user for the location of where Godzilla
+        would appear. Godzilla, being an amphibian, can be on either land or water.*/
+    }
+    
+    /*********ABOUT***************/
+    public void about(){
+        String about = "Byte Me\nCSE 1325-002\nApril 17,2015\n\nName: Cam Nguyen\nID: 1000952534\n\nName: Pauline Nguyen\n ID: 1000781109\n\nName: Zach Niemann\nID: 1000625866\n\n";
+        JOptionPane.showMessageDialog(this, about, "About Us", JOptionPane.PLAIN_MESSAGE);
     }
 }

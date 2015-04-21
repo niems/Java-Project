@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -77,6 +78,8 @@ public class FileHandler {
 
         }catch(FileNotFoundException e){
             System.out.println("The file name entered could not be found.");
+            String fileNotFound = "The file can not be found.\n Please check if the file is in the correct directory.";
+            JOptionPane.showMessageDialog(null, fileNotFound, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
         }catch(Exception e){
             e.printStackTrace();
         }
