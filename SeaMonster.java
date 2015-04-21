@@ -19,4 +19,6 @@ public abstract class SeaMonster {
     
     public abstract void battleCry(); //overridden in each child class
     
+    
+    
 }

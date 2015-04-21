@@ -334,10 +334,24 @@ public class MenuFrame extends JFrame implements ActionListener{
     
     public void displayAllMonsters(){
         /*Show the current monsters in the status message at the bottom of the screen*/
+        String output;
+        
+        if(MenuFrame.map.getSeamonsters().size() > 0){
+            for(int i = 0; i < MenuFrame.map.getSeamonsters().size(); i++){
+                output = i + ": " + MenuFrame.map.getSeamonsters().get(i).type;
+                this.messageBox.append(output);
+            }
+        }
+        
+        else{
+            this.messageBox.append("No sea monsters to display");
+        }
+        
     }
     
     public void removeAllMonsters(){
         /*Remove all monsters from the map*/
+        MenuFrame.map.getSeamonsters().clear();
     }
     
     public void summonGodzilla(){
