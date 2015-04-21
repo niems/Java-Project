@@ -219,13 +219,23 @@ public class MenuFrame extends JFrame implements ActionListener{
     
     /********FILE MENU**********/
     public void open(){
-        String tag = JOptionPane.showInputDialog("Enter file tag: "); //gets file tag from user
+        
+        //gets the info from the files
+        String tag = JOptionPane.showInputDialog("Enter file tag: "); 
         MenuFrame.map.file = new FileHandler(map, tag); 
         MenuFrame.map.file.loadAllFiles(MenuFrame.map);
+        
+        //update graphically
+        
     }
     
     public void close(){
+        MenuFrame.map.setCurrentMap(null);
+        MenuFrame.map.getCurrentShips().clear(); //erases all ships
+        MenuFrame.map.getPort().getDock().clear(); //erases all docks
+        MenuFrame.map.getPort().getCargo().clear(); //erases all cargo
         
+        //erase all seamonsters
     }
     
     public void snapshot(){
