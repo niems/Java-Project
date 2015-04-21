@@ -100,10 +100,14 @@ public class Cargo {
     }  
     
     public String toString(){
-        return( this.getDescription() +"," + this.getWeight() );
+        return( this.getDescription() +"," + this.getWeight() + "\n" );
     }
     
     public void displayCargo() {
         System.out.println(this.weight + " tons of " + this.description);
+    }
+    
+    public String displayCurrentCargo(){
+        return(this.weight + " tons of " + this.description);
     }
 }

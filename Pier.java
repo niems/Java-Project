@@ -46,7 +46,7 @@ public class Pier extends Dock{
     }
     
     public String toString(){
-        return(this.name + " " + this.number + "," + this.section + "," + this.number + "," + this.length + "," + this.depth + "," + this.width + "," + this.longitude + "," + this.latitude);
+        return(this.name + " " + this.number + "," + this.section + "," + this.number + "," + this.length + "," + this.depth + "," + this.width + "," + this.longitude + "," + this.latitude + "\n");
     }
     
     public void display(){

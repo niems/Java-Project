@@ -117,7 +117,7 @@ public class Menu {
 
                 switch(selection) {
                     case "1": //Generate Ships
-                        map.generateShips();                        
+                        //map.generateShips();                        
                         break;
                     case "2": //Update Ship
                          map.updateShip();
