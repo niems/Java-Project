@@ -488,5 +488,5 @@ public class CargoShip {
     public void setSymbol(char symbol) {
         this.symbol = symbol;
     }
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
+
 }
