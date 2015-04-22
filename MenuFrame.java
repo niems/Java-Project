@@ -10,13 +10,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
+
 import java.io.FileNotFoundException;
 import javax.swing.JFrame;
 import javax.swing.JList;
-=======
+
 import javax.swing.JFrame;
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -24,10 +24,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
+
+
 /**
  *
  * @author Cam
@@ -145,7 +144,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         //Creates an textArea
         messageBox = new JTextArea(8,200);//text area being created with a set size
         messageBox.setEditable(false);// makes it uneditable for the user
-<<<<<<< HEAD
+
         JScrollPane scrollbar = new JScrollPane (messageBox, 
         JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);//puts it in a scrollpane with a vertical scrollbar
         this.add(scrollbar,BorderLayout.SOUTH);
