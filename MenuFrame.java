@@ -150,14 +150,12 @@ public class MenuFrame extends JFrame implements ActionListener{
         this.add(scrollbar,BorderLayout.SOUTH);
         
 
-        
-=======
         messageBox.setLineWrap(true);
         JScrollPane scrollbar = new JScrollPane (messageBox, 
-        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);//puts it in a scrollpane with a vertical scrollbar
+        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);//puts it in a scrollpane with a vertical scrollbar
         this.add(scrollbar,BorderLayout.SOUTH);
         
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
+
         // Sets the size of the main window        
         Dimension size = new Dimension(800,600);
         this.setSize(size);
