@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -37,7 +38,7 @@ public class ContainerShip extends CargoShip {
         temp ="Container Ship," + this.getName() + "," + this.getCountry() + "," + this.getCapacity() + "," + this.getLength() + "," + this.getBeam() + "," + this.getDraft() + "," + this.getLatitude() + "," + this.getLongitude();
         
         if(this.getCargo() != null){ //adds cargo if it exists for the current ship
-            temp += "," + this.getCargo().toString() + "\n";
+            temp += "," + this.getCargo().toString();
         }
         
         return(temp);
@@ -55,3 +56,4 @@ public class ContainerShip extends CargoShip {
         this.cargo.displayCargo();
     }
 }
+

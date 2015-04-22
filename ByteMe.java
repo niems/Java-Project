@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,3 +27,27 @@ public class ByteMe {
     
 }
 */
+=======
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package pkgbyte.me;
+
+/**
+ *
+ * @author Niems
+ */
+public class ByteMe {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        
+        MenuFrame menuFrame = new MenuFrame();
+    }
+    
+}
+>>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845

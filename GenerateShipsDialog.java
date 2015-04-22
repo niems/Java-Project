@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -34,8 +35,6 @@ public class GenerateShipsDialog extends JDialog implements ActionListener{
     private JButton cancelButton;
     private JLabel prompt;
     private JTextField inputShip;
-    private JTextField coolpeople;
-    private JLabel nice;
     private Map map;
     
     public GenerateShipsDialog(MenuFrame menuFrame, Map map){
@@ -48,6 +47,7 @@ public class GenerateShipsDialog extends JDialog implements ActionListener{
         cancelButton = new JButton(commandCancelButton);
         prompt = new JLabel("Enter the amount of ships that will be generated.");
         inputShip = new JTextField(commandShipAmount);
+        
         rootLayout = new GridBagLayout();
         positions = new GridBagConstraints();
         setLayout(rootLayout);// sets the window's layout
@@ -70,7 +70,6 @@ public class GenerateShipsDialog extends JDialog implements ActionListener{
         positions.fill = GridBagConstraints.LINE_END;
         addComponent(cancelButton,3,2,1,1);
         cancelButton.addActionListener(this);
-
         
         setModalityType(ModalityType.APPLICATION_MODAL); //sets the window's modality 
         setTitle("Generate Ships"); //names the window
