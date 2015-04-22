@@ -174,6 +174,9 @@ public class MenuFrame extends JFrame implements ActionListener{
             case commandDisplayAllShips:
                 displayAllShips();
                 break;
+            case commandRemoveAllShips:
+                removeAllShips();
+                break;
             case commandUnloadShip:
                 unloadShip();
                 break;
@@ -253,7 +256,6 @@ public class MenuFrame extends JFrame implements ActionListener{
         GenerateShipsBox gsb = new GenerateShipsBox();
         gsb.setSize(new Dimension(500,150));
         gsb.setVisible(true);        
-        
     }
     
     public void updateShips(){
