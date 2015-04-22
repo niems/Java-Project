@@ -253,9 +253,8 @@ public class MenuFrame extends JFrame implements ActionListener{
     /********SHIP MENU**********/
     public void generateShips()
     {
-        GenerateShipsBox gsb = new GenerateShipsBox();
-        gsb.setSize(new Dimension(500,150));
-        gsb.setVisible(true);        
+        GenerateShipsDialog gsd = new GenerateShipsDialog(this,MenuFrame.map);
+        gsd.setVisible(true);    
     }
     
     public void updateShips(){
