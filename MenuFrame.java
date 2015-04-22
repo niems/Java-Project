@@ -139,7 +139,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         messageBox = new JTextArea(8,200);//text area being created with a set size
         messageBox.setEditable(false);// makes it uneditable for the user
         JScrollPane scrollbar = new JScrollPane (messageBox, 
-        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);//puts it in a scrollpane with a vertical scrollbar
+        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);//puts it in a scrollpane with a vertical scrollbar
         this.add(scrollbar,BorderLayout.SOUTH);
         
 
@@ -272,13 +272,25 @@ public class MenuFrame extends JFrame implements ActionListener{
     }
     
     public void displayAllShips(){
-        /*Show the current ships in the status message box at the bottom of the screen */
-        JList shipList = new JList(MenuFrame.map.getCurrentShips().toArray());
+    /*Show the current ships in the status message box at the bottom of the screen */
+        String output;
         
+        if(MenuFrame.map.getCurrentShips().size() > 0){
+            for(int i = 0; i < MenuFrame.map.getCurrentShips().size(); i++){
+                output = MenuFrame.map.getCurrentShips().get(i).toString();
+                this.messageBox.append(output); //
+            }
+        }
+        
+        else{
+            this.messageBox.append("No ships to display.\n");
+        }
     }
+    
     
     public void removeAllShips(){
         /*Remove all ships from the current map */
+        MenuFrame.map.removeShips();
     }
     
     
@@ -296,11 +308,39 @@ public class MenuFrame extends JFrame implements ActionListener{
     
     public void displayAllDocks(){
         /*Show the current docks in the status message box at the bottom of the screen.*/
+                /*Show the current docks in the status message box at the bottom of the screen.*/
+        String output;
+        
+        if(MenuFrame.map.getPort().getDock().size() > 0){
+            this.messageBox.append("Docks:\n");
+            for(int i = 0; i < MenuFrame.map.getPort().getDock().size(); i++){
+                output = MenuFrame.map.getPort().getDock().get(i).toString();
+                this.messageBox.append(i + ": " + output);
+            }
+        }
+        
+        else{
+            this.messageBox.append("No docks to display\n");
+        }
     }
     
     public void displayAllCargo(){
+
         /*Shows the current cargos in the port in the status message at the bottom
         of the screen.*/
+        String output;
+        
+        if(MenuFrame.map.getPort().getCargo().size() > 0){
+            this.messageBox.append("Cargo:");
+            for(int i = 0; i < MenuFrame.map.getPort().getCargo().size(); i++){
+                output = MenuFrame.map.getPort().getCargo().get(i).toString();
+                this.messageBox.append(i + ": " + output);
+            }
+        }
+        
+        else{
+            this.messageBox.append("No cargo to display\n");
+        }
     }
     
     

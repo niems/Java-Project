@@ -37,7 +37,7 @@ public class ContainerShip extends CargoShip {
         temp ="Container Ship," + this.getName() + "," + this.getCountry() + "," + this.getCapacity() + "," + this.getLength() + "," + this.getBeam() + "," + this.getDraft() + "," + this.getLatitude() + "," + this.getLongitude();
         
         if(this.getCargo() != null){ //adds cargo if it exists for the current ship
-            temp += "," + this.getCargo().toString();
+            temp += "," + this.getCargo().toString() + "\n";
         }
         
         return(temp);

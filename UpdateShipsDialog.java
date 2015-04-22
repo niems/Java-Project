@@ -28,7 +28,7 @@ public class UpdateShipsDialog extends JDialog implements ActionListener {
     private final JButton cancelButton;
     private final Map map;
     private final JComboBox <CargoShip> shipBox;
-    private final Jlabel prompt;
+    private final JLabel prompt;
     
     public UpdateShipsDialog(MenuFrame menuFrame, Map map)
     {
