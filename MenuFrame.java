@@ -129,11 +129,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         
         menuitemAbout=new JMenuItem(commandAbout);
         menuitemAbout.addActionListener(MenuFrame.this);
-<<<<<<< HEAD
-                
-=======
-        //        
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
+
         // Add the menus onto the menubar and the about button
         menuBar.add(fileMenu);
         menuBar.add(menuShip);
@@ -197,12 +193,10 @@ public class MenuFrame extends JFrame implements ActionListener{
             case commandDisplayAllShips:
                 displayAllShips();
                 break;
-<<<<<<< HEAD
-=======
+
             case commandRemoveAllShips:
                 removeAllShips();
                 break;
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
             case commandUnloadShip:
                 unloadShip();
                 break;
@@ -248,7 +242,6 @@ public class MenuFrame extends JFrame implements ActionListener{
     /********FILE MENU**********/
     public void open(){ //loads the files
         
-<<<<<<< HEAD
 
             //gets the info from the files
             String tag = JOptionPane.showInputDialog("Enter file tag: "); 
@@ -256,14 +249,8 @@ public class MenuFrame extends JFrame implements ActionListener{
             MenuFrame.map.file.loadAllFiles(MenuFrame.map);
 
             String fileNotFound = "The file can not be found.\n Please check if the file is in the correct directory.";
-            JOptionPane.showMessageDialog(null, fileNotFound, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(this, fileNotFound, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
 
-=======
-        //gets the info from the files
-        String tag = JOptionPane.showInputDialog("Enter file tag: "); 
-        MenuFrame.map.file = new FileHandler(map, tag); 
-        MenuFrame.map.file.loadAllFiles(MenuFrame.map);
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
         
         //update graphically here
         
@@ -292,30 +279,27 @@ public class MenuFrame extends JFrame implements ActionListener{
     public void generateShips()
     {
         GenerateShipsDialog gsd = new GenerateShipsDialog(this,MenuFrame.map);
-<<<<<<< HEAD
         gsd.setVisible(true);        
-=======
-        gsd.setVisible(true);    
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
+
     }
     
     public void updateShips(){
         /*Prompt the user with a dialog box with a list item containing the names
         of all available ships. Once a ship has been slected, open a second dialog
         box that will allow the user to update the current ship properties.*/
-<<<<<<< HEAD
+
         UpdateShipsDialog usd = new UpdateShipsDialog(this,MenuFrame.map);
         usd.setVisible(true);
     }
     
     public void displayAllShips(){
     /*Show the current ships in the status message box at the bottom of the screen */
-=======
+
     }
     
     public void displayAllShips(){
         /*Show the current ships in the status message box at the bottom of the screen */
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
+
         String output;
         
         if(MenuFrame.map.getCurrentShips().size() > 0){
@@ -329,8 +313,7 @@ public class MenuFrame extends JFrame implements ActionListener{
             this.messageBox.append("No ships to display.\n");
         }
     }
-    
-<<<<<<< HEAD
+
     
     public void removeAllShips(){
         /*Remove all ships from the current map */
@@ -344,22 +327,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         {
             this.messageBox.append("No Ships to remove.");
         }
-=======
-    public void removeAllShips(){
-        /*Remove all ships from the current map */
-        
-        if(MenuFrame.map.getCurrentShips().size() > 0){
-            MenuFrame.map.getCurrentShips().clear();
-            this.messageBox.append("Ships successfully removed.\n");
-        }
-        
-        else{
-            this.messageBox.append("No ships to remove.\n");
-        }
-        
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
-    }
-    
+
     
     /********PORT MENU**********/
     public void unloadShip(){
@@ -375,11 +343,9 @@ public class MenuFrame extends JFrame implements ActionListener{
     
     public void displayAllDocks(){
         /*Show the current docks in the status message box at the bottom of the screen.*/
-<<<<<<< HEAD
+
                 /*Show the current docks in the status message box at the bottom of the screen.*/
-=======
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
-        String output;
+
         
         if(MenuFrame.map.getPort().getDock().size() > 0){
             this.messageBox.append("Docks:\n");
@@ -395,10 +361,7 @@ public class MenuFrame extends JFrame implements ActionListener{
     }
     
     public void displayAllCargo(){
-<<<<<<< HEAD
 
-=======
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
         /*Shows the current cargos in the port in the status message at the bottom
         of the screen.*/
         String output;
@@ -432,8 +395,7 @@ public class MenuFrame extends JFrame implements ActionListener{
     
     public void displayAllMonsters(){
         /*Show the current monsters in the status message at the bottom of the screen*/
-<<<<<<< HEAD
-=======
+
         String output;
         
         if(MenuFrame.map.getSeamonsters().size() > 0){
@@ -447,13 +409,12 @@ public class MenuFrame extends JFrame implements ActionListener{
             this.messageBox.append("No sea monsters to display");
         }
         
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
+
     }
     
     public void removeAllMonsters(){
         /*Remove all monsters from the map*/
-<<<<<<< HEAD
-=======
+
         
         if(MenuFrame.map.getSeamonsters().size() > 0){
             MenuFrame.map.getSeamonsters().clear();
@@ -464,7 +425,7 @@ public class MenuFrame extends JFrame implements ActionListener{
             this.messageBox.append("No sea monsters to remove.\n");
         }
         
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
+
     }
     
     public void summonGodzilla(){
@@ -475,10 +436,7 @@ public class MenuFrame extends JFrame implements ActionListener{
     /*********ABOUT***************/
     public void about(){
         String about = "Byte Me\nCSE 1325-002\nApril 17,2015\n\nName: Cam Nguyen\nID: 1000952534\n\nName: Pauline Nguyen\n ID: 1000781109\n\nName: Zach Niemann\nID: 1000625866\n\n";
-<<<<<<< HEAD
         JOptionPane.showMessageDialog(this, about, "About Us", JOptionPane.PLAIN_MESSAGE);
-=======
-        JOptionPane.showMessageDialog(null, about, "About Us", JOptionPane.PLAIN_MESSAGE);
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
+
     }
 }
