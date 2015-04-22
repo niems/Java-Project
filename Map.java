@@ -309,7 +309,7 @@ public class Map {
     
     
     
-    public void generateShips() throws NullPointerException {
+    public void generateShips(int size) throws NullPointerException {
         if(this.geoStatus != null){
             CargoShip cargoShip = null;
             ContainerShip containerShip = null;
@@ -322,7 +322,7 @@ public class Map {
             String lName[] = {"Buffalo", "Pastures", "Knight", "Wave", "Star", "Moon", "Lion", "Goat", "Pride", "Joy"};
             double highLimit = 0.0, lowLimit = 0.0;
             double latitude = 0.0, longitude = 0.0;
-            int size = 0, i = 0; //number of ships to generate  
+            int i = 0;
             int tempRow = 0, tempColumn = 0; //used to determine if the ship is valid(not on land)
             int shipType = 0; //determines which ship type to generate
             boolean valid = true; //true if the ship isn't generated on land
@@ -331,17 +331,6 @@ public class Map {
             
             
             try{
-
-                do{
-                    System.out.print("Enter the number of ships to generate(1-10): ");
-                    System.out.flush();
-                    size = input.nextInt();
-
-                    if(size < 1 || size > 10){ 
-                        System.out.println("You must enter a number between 1 and 10.");
-                    }
-
-                }while(size < 1 || size > 10);
 
                 for(i = 0; i < size; i++) { //creates the ships
 
