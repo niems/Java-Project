@@ -211,7 +211,7 @@ public class Cargo {
     }  
     
     public String toString(){
-        return( this.getDescription() +"," + this.getWeight() + "\n" );
+        return( this.getDescription() +"," + this.getWeight() );
     }
     
     public void displayCargo() {

@@ -575,7 +575,7 @@ public class Dock {
     }
     
     public String toString(){ //returns a string of the dock info
-        return(this.name + "," + this.section + "," + this.number + "," + this.length + "," + this.depth + "," + this.width + "," + this.longitude + "," + this.latitude + "\n");
+        return(this.name + "," + this.section + "," + this.number + "," + this.length + "," + this.depth + "," + this.width + "," + this.longitude + "," + this.latitude );
     }
     
     public void displayDockInfo() { //displays the dock info to the screen

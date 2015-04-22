@@ -303,7 +303,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         
         if(MenuFrame.map.getCurrentShips().size() > 0){
             for(int i = 0; i < MenuFrame.map.getCurrentShips().size(); i++){
-                output = MenuFrame.map.getCurrentShips().get(i).toString();
+                output = MenuFrame.map.getCurrentShips().get(i).toString() + "\n";
                 this.messageBox.append(output); //
             }
         }
@@ -349,7 +349,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         if(MenuFrame.map.getPort().getDock().size() > 0){
             this.messageBox.append("Docks:\n");
             for(int i = 0; i < MenuFrame.map.getPort().getDock().size(); i++){
-                output = MenuFrame.map.getPort().getDock().get(i).toString();
+                output = MenuFrame.map.getPort().getDock().get(i).toString() + "\n";
                 this.messageBox.append(i + ": " + output);
             }
         }
@@ -368,7 +368,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         if(MenuFrame.map.getPort().getCargo().size() > 0){
             this.messageBox.append("Cargo:");
             for(int i = 0; i < MenuFrame.map.getPort().getCargo().size(); i++){
-                output = MenuFrame.map.getPort().getCargo().get(i).toString();
+                output = MenuFrame.map.getPort().getCargo().get(i).toString() + "\n";
                 this.messageBox.append(i + ": " + output);
             }
         }
@@ -399,7 +399,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         
         if(MenuFrame.map.getSeamonsters().size() > 0){
             for(int i = 0; i < MenuFrame.map.getSeamonsters().size(); i++){
-                output = i + ": " + MenuFrame.map.getSeamonsters().get(i).type;
+                output = i + ": " + MenuFrame.map.getSeamonsters().get(i).type + "\n";
                 this.messageBox.append(output);
             }
         }

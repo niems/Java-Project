@@ -74,7 +74,7 @@ public class Oil extends Cargo{
     }
     
     public String toString(){
-        return(this.description + "," + this.barrels);
+        return(this.description + "," + this.barrels );
     }
     
     public void display() {

@@ -73,7 +73,7 @@ public class Box extends Cargo {
     }
     
     public String toString(){
-        return(this.description + "," + this.teu);
+        return(this.description + "," + this.teu );
     }
     
     public void display(){
