@@ -309,15 +309,9 @@ public class Map {
     
     
     
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     public void generateShips( int size) throws NullPointerException {
-=======
-    public void generateShips() throws NullPointerException {
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
-=======
-    public void generateShips(int size) throws NullPointerException {
->>>>>>> 8dcb7dbedde8f534a1eb893a36e23013597f68d1
+
         if(this.geoStatus != null){
             CargoShip cargoShip = null;
             ContainerShip containerShip = null;
@@ -330,30 +324,19 @@ public class Map {
             String lName[] = {"Buffalo", "Pastures", "Knight", "Wave", "Star", "Moon", "Lion", "Goat", "Pride", "Joy"};
             double highLimit = 0.0, lowLimit = 0.0;
             double latitude = 0.0, longitude = 0.0;
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             //int size = 0, i = 0; //number of ships to generate  
             int tempRow = 0, tempColumn = 0; //used to determine if the ship is valid(not on land)
             int shipType = 0; //determines which ship type to generate
             boolean valid = true; //true if the ship isn't generated on land
             int i = 0;
-=======
-            int size = 0, i = 0; //number of ships to generate  
-=======
-            int i = 0;
->>>>>>> 8dcb7dbedde8f534a1eb893a36e23013597f68d1
-            int tempRow = 0, tempColumn = 0; //used to determine if the ship is valid(not on land)
-            int shipType = 0; //determines which ship type to generate
-            boolean valid = true; //true if the ship isn't generated on land
 
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
             rand.setSeed(System.currentTimeMillis()); 
             
             
             try{
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                 /*do{
 =======
                 do{
@@ -368,12 +351,7 @@ public class Map {
 
 <<<<<<< HEAD
                 }while(size < 1 || size > 10);*/
-=======
-                }while(size < 1 || size > 10);
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
 
-=======
->>>>>>> 8dcb7dbedde8f534a1eb893a36e23013597f68d1
                 for(i = 0; i < size; i++) { //creates the ships
 
                     do{ 

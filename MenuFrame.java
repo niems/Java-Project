@@ -289,10 +289,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         usd.setVisible(true);
     }
     
-    public void displayAllShips(){
-    /*Show the current ships in the status message box at the bottom of the screen */
 
-    }
     
     public void displayAllShips(){
         /*Show the current ships in the status message box at the bottom of the screen */
@@ -324,7 +321,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         {
             this.messageBox.append("No Ships to remove.");
         }
-
+    }
     
     /********PORT MENU**********/
     public void unloadShip(){
@@ -436,4 +433,5 @@ public class MenuFrame extends JFrame implements ActionListener{
         JOptionPane.showMessageDialog(this, about, "About Us", JOptionPane.PLAIN_MESSAGE);
 
     }
+}
 }
