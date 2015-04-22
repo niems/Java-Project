@@ -344,7 +344,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         if(MenuFrame.map.getPort().getDock().size() > 0){
             this.messageBox.append("Docks:\n");
             for(int i = 0; i < MenuFrame.map.getPort().getDock().size(); i++){
-                output = MenuFrame.map.getPort().getDock().get(i).toString() + "\n";
+                String output = MenuFrame.map.getPort().getDock().get(i).toString() + "\n";
                 this.messageBox.append(i + ": " + output);
             }
         }
@@ -433,5 +433,4 @@ public class MenuFrame extends JFrame implements ActionListener{
         JOptionPane.showMessageDialog(this, about, "About Us", JOptionPane.PLAIN_MESSAGE);
 
     }
-}
 }
