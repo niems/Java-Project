@@ -280,7 +280,16 @@ public class MenuFrame extends JFrame implements ActionListener{
     
     public void removeAllShips(){
         /*Remove all ships from the current map */
-        MenuFrame.map.getCurrentShips().clear();
+        
+        if(MenuFrame.map.getCurrentShips().size() > 0){
+            MenuFrame.map.getCurrentShips().clear();
+            this.messageBox.append("Ships successfully removed.\n");
+        }
+        
+        else{
+            this.messageBox.append("No ships to remove.\n");
+        }
+        
     }
     
     
@@ -364,7 +373,16 @@ public class MenuFrame extends JFrame implements ActionListener{
     
     public void removeAllMonsters(){
         /*Remove all monsters from the map*/
-        MenuFrame.map.getSeamonsters().clear();
+        
+        if(MenuFrame.map.getSeamonsters().size() > 0){
+            MenuFrame.map.getSeamonsters().clear();
+            this.messageBox.append("Sea monsters successfully removed.\n");
+        }
+        
+        else{
+            this.messageBox.append("No sea monsters to remove.\n");
+        }
+        
     }
     
     public void summonGodzilla(){
