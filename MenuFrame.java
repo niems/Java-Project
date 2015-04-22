@@ -290,7 +290,16 @@ public class MenuFrame extends JFrame implements ActionListener{
     
     public void removeAllShips(){
         /*Remove all ships from the current map */
-        MenuFrame.map.removeShips();
+        
+        if (!MenuFrame.map.getCurrentShips().isEmpty())
+        {
+            MenuFrame.map.getCurrentShips().clear();
+            this.messageBox.setText("Ships have been removed.");
+        }
+        else
+        {
+            this.messageBox.append("No Ships to remove.");
+        }
     }
     
     
