@@ -145,11 +145,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         messageBox = new JTextArea(8,200);//text area being created with a set size
         messageBox.setEditable(false);// makes it uneditable for the user
 
-        JScrollPane scrollbar = new JScrollPane (messageBox, 
-        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);//puts it in a scrollpane with a vertical scrollbar
-        this.add(scrollbar,BorderLayout.SOUTH);
         
-
         messageBox.setLineWrap(true);
         JScrollPane scrollbar = new JScrollPane (messageBox, 
         JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);//puts it in a scrollpane with a vertical scrollbar
