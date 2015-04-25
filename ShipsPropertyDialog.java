@@ -78,6 +78,15 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
     
     private void initShipPropertyDialog()
     {
+        rootLayout = new GridBagLayout();
+        positions = new GridBagConstraints();
+        setLayout(rootLayout);
+        
+        setModalityType(ModalityType.APPLICATION_MODAL); //sets the window's modality 
+        setTitle("Ship Properties"); //names the window
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);// closes the window if the x is clicked
+        setLocationRelativeTo(getParent());//places the window in the center of the main window
+        
         //fills the labels with their prompts
         shipName = new JLabel(prompt + commandShipName);
         shipCountry = new JLabel(prompt + commandShipCountry + " of Registration");
@@ -107,7 +116,15 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
         okButton = new JButton(commandOkButton);
         cancelButton = new JButton(commandCancelButton);
         
-        
+    }
+    private void addComponent(Component component,int row, int column, int width, int height)
+    {
+        positions.gridx = column;
+        positions.gridy = row;
+        positions.gridwidth = height;
+        positions.gridwidth = width;
+        rootLayout.setConstraints(component,positions);
+        add(component); //adds the component onto the layout
     }
     @Override
     public void actionPerformed(ActionEvent ae) {
