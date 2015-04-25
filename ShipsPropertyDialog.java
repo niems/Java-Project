@@ -34,37 +34,50 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
     public final String commandShipDraft = "Draft";
     public final String commandShipLongitude = "Longitude";
     public final String commandShipLatitude = "Latitude";
+    public final String prompt = "Enter the ship's new ";
     
-    private GridBagLayout rootLayout;
+    private GridBagLayout rootLayout; // layout to hold all the components
     private GridBagConstraints positions;
     private JButton okButton;
     private JButton cancelButton;
     
-    private JLabel shipName;
+    private final JLabel shipName;
     private JTextField inputName;
-    private JLabel shipCountry;
+    private final JLabel shipCountry;
     private JTextField inputCountry;
-    private JLabel shipTransponder;
+    private final JLabel shipTransponder;
     private JTextField inputTransponder;
-    private JLabel shipCapacity;
+    private final JLabel shipCapacity;
     private JTextField inputCapacity; 
-    private JLabel shipLength;
+    private final JLabel shipLength;
     private JTextField inputLength;
-    private JLabel shipBeam;
+    private final JLabel shipBeam;
     private JTextField inputBeam;
-    private JLabel shipDraft;
+    private final JLabel shipDraft;
     private JTextField inputDraft;
-    private JLabel shipLongitude;
+    private final JLabel shipLongitude;
     private JTextField inputLongitude;
-    private JLabel  shipLatitude;
+    private final JLabel  shipLatitude;
     private JTextField inputLatitude;
     private CargoShip ship;
-    
+
     
     public ShipsPropertyDialog(MenuFrame menuFrame, CargoShip ship)
     {
+        //makes menuFrame the parent
         super(menuFrame);
         this.ship = ship;
+        
+        //fills the labels with their prompts
+        shipName = new JLabel(prompt + commandShipName);
+        shipCountry = new JLabel(prompt + commandShipCountry + " of Registration");
+        shipTransponder = new JLabel(prompt + commandShipTransponder + " Number");
+        shipCapacity = new JLabel(prompt + "Cargo" + commandShipCapacity);
+        shipLength = new JLabel(prompt + commandShipLength);
+        shipBeam = new JLabel(prompt + commandShipBeam);
+        shipDraft = new JLabel(prompt + commandShipDraft);
+        shipLongitude = new JLabel(prompt + commandShipLongitude);
+        shipLatitude = new JLabel(prompt + commandShipLatitude);
     }
     @Override
     public void actionPerformed(ActionEvent ae) {
