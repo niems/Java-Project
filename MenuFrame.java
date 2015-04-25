@@ -8,10 +8,12 @@ package pkgbyte.me;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
+import javax.swing.JPanel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -28,6 +30,8 @@ public class MenuFrame extends JFrame implements ActionListener{
     
     private final JMenuBar menuBar;
     private JMenuItem menuItem; //used for all menu items
+    
+    private JPanel mapPanel; //used to display the map
     
     private final JMenu fileMenu;
     private final JMenu menuShip;
@@ -79,6 +83,8 @@ public class MenuFrame extends JFrame implements ActionListener{
         //creates the map and file handler to load in system files
         map = new Map();
         //map.file = new FileHandler(map);
+        
+        
 
         //Creates the menubar to hold the menus and items
         menuBar = new JMenuBar();
@@ -144,6 +150,15 @@ public class MenuFrame extends JFrame implements ActionListener{
         Dimension size = new Dimension(800,600);
         this.setSize(size);
         this.setVisible(true);
+        
+        
+        //setup for the map in the center of the window
+        mapPanel = new JPanel(); //creates the panel for the map
+        mapPanel.setLayout(new GridLayout(1, 1, 0, 0));
+        mapPanel.setPreferredSize(new Dimension(size.height - messageBox.getHeight(), size.width ));
+        
+        this.add(mapPanel);
+        
         
     }
 
@@ -367,7 +382,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         }
         
         else{
-            this.messageBox.append("No sea monsters to display");
+            this.messageBox.append("No sea monsters to display\n");
         }
         
     }

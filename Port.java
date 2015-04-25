@@ -18,6 +18,7 @@ public class Port {
     private String name; //name of the current port
     private ArrayList<Dock> dock; //all the docks 
     private ArrayList<Cargo> cargo; //all the cargo delivered to the Port
+    ArrayList<CargoShip> safeShips; //current safe ships
     
     public Port() {
         this.name = "Liverpool";
@@ -63,7 +64,7 @@ public class Port {
     }
     
     public void unloadShip(Map map){
-        ArrayList<CargoShip> safeShips = new ArrayList();
+        this.safeShips.clear(); //clears out stale data
         Scanner input = new Scanner(System.in);
         int selection = 0;
         boolean again = true; //loops if true
