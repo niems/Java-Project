@@ -120,8 +120,8 @@ public class FileHandler {
         Scanner fileInput; //reads input from the file
         Scanner userInput = new Scanner(System.in); //reads input from the keyboard
         String item[]; //holds the parts of the current line(column,row,type)
-        String[][] tempGeoMap = new String[map.getMapRows()][map.getMapCols()];
-        String[][] tempCurrentMap = new String[map.getMapRows()][map.getMapCols()];
+        String[][] tempGeoMap = new String[Map.mapRows][Map.mapCols];
+        String[][] tempCurrentMap = new String[Map.mapRows][Map.mapCols];
         int row, column; //current row and column
         boolean again = false;
         

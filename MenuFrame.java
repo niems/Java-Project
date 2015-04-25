@@ -156,7 +156,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         mapPanel = new JPanel(); //creates the panel for the map
         mapPanel.setLayout(new GridLayout(1, 1, 0, 0));
         mapPanel.setPreferredSize(new Dimension(size.height - messageBox.getHeight(), size.width ));
-        
+        mapPanel.setBackground(Color.CYAN);
         this.add(mapPanel);
         
         

@@ -23,6 +23,8 @@ public class Map {
     public static int stateUnsafe = 0; //if the ship is unsafe
     public static int stateSafeAtSea = 1; //if the ship is safe at sea
     public static int stateSafeAtDock = 2; //if the ship is safe at a dock
+    public static int mapRows = 36; //number of rows in the map
+    public static int mapCols = 54; //number of columns in the map
     
     protected FileHandler file; //used to read and save files
     protected Menu menu; //the navigation for the program
@@ -41,8 +43,6 @@ public class Map {
     private char unsafeShip;
     private char shipReadyToUnload;
     
-    private int mapRows; //number of rows in the map
-    private int mapCols; //number of columns in the map
     private String[][] geoStatus; //land or sea 
     private String[][] currentMap; //includes ship and dock locations
     private ArrayList<CargoShip> currentShips; //current ships displayed on the map
@@ -58,8 +58,8 @@ public class Map {
         this.menu = new Menu();
         this.water = '.';
         this.land = '*';
-        this.mapRows = 36;
-        this.mapCols = 54; 
+        //this.mapRows = 36;
+        //this.mapCols = 54; 
         this.geoStatus = null;
         this.currentMap = null;
         
@@ -128,8 +128,8 @@ public class Map {
             }
 
             //DISPLAY MAP
-            for(int i = 0; i < this.mapRows; i++) {
-                for(int j = 0; j < this.mapCols; j++) {
+            for(int i = 0; i < Map.mapRows; i++) {
+                for(int j = 0; j < Map.mapCols; j++) {
                     System.out.print(this.currentMap[i][j]);
                 }
                 System.out.println();
@@ -240,30 +240,25 @@ public class Map {
     /**
      * @return the mapRows
      */
+    /*
     public int getMapRows() {
         return this.mapRows;
     }
 
-    /**
-     * @param mapRows the mapRows to set
-     */
+    
     public void setMapRows(int mapRows) {
         this.mapRows = mapRows;
-    }
+    } 
 
-    /**
-     * @return the mapCols
-     */
+    
     public int getMapCols() {
         return this.mapCols;
     }
 
-    /**
-     * @param mapCols the mapCols to set
-     */
+    
     public void setMapCols(int mapCols) {
         this.mapCols = mapCols;
-    }
+    } */
 
     /**
      * @return the geoStatus

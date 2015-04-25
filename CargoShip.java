@@ -189,8 +189,8 @@ public class CargoShip {
     public void setRowAndCol(Map map){
         Scanner input = new Scanner(System.in);
         int tempRow = 0, tempCol = 0;
-        int maxRow = map.getMapRows() - 1;
-        int maxCol = map.getMapCols() - 1;
+        int maxRow = Map.mapRows - 1;
+        int maxCol = Map.mapCols - 1;
         boolean valid = true; //false if input given is invalid
         
         try{
