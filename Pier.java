@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -57,3 +58,4 @@ public class Pier extends Dock{
         System.out.println("Location(" + MapConverter.lon2col(this.longitude) + ", " + MapConverter.lat2row(this.latitude));
     }
 }
+
