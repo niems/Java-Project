@@ -58,8 +58,14 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
     private JTextField inputLongitude;
     private JLabel  shipLatitude;
     private JTextField inputLatitude;
+    private CargoShip ship;
     
-    private Map map;
+    
+    public ShipsPropertyDialog(MenuFrame menuFrame, CargoShip ship)
+    {
+        super(menuFrame);
+        this.ship = ship;
+    }
     @Override
     public void actionPerformed(ActionEvent ae) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
