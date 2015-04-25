@@ -34,6 +34,8 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
     public final String commandShipDraft = "Draft";
     public final String commandShipLongitude = "Longitude";
     public final String commandShipLatitude = "Latitude";
+    public final String commandShipRow = "Row";
+    public final String commandShipCol = "Column";
     public final String prompt = "Enter the ship's new ";
     
     private GridBagLayout rootLayout; // layout to hold all the components
@@ -59,6 +61,10 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
     private JTextField inputLongitude;
     private final JLabel  shipLatitude;
     private JTextField inputLatitude;
+    private final JLabel shipRow;
+    private JTextField inputRow;
+    private final JLabel shipCol;
+    private JTextField inputCol;
     private CargoShip ship;
 
     
@@ -67,7 +73,11 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
         //makes menuFrame the parent
         super(menuFrame);
         this.ship = ship;
-        
+        initShipPropertyDialog();
+    }
+    
+    private void initShipPropertyDialog()
+    {
         //fills the labels with their prompts
         shipName = new JLabel(prompt + commandShipName);
         shipCountry = new JLabel(prompt + commandShipCountry + " of Registration");
@@ -78,6 +88,26 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
         shipDraft = new JLabel(prompt + commandShipDraft);
         shipLongitude = new JLabel(prompt + commandShipLongitude);
         shipLatitude = new JLabel(prompt + commandShipLatitude);
+        shipRow = new JLabel(prompt + commandShipRow);
+        shipCol = new JLabel(prompt + commandShipCol);
+        
+        //institates the the textfields and sets the default text
+        inputShipName = new JTextField(commandShipName);
+        inputShipCountry = new JTextField(commandShipCountry);
+        inputShipTransponder = new JTextField(commandShipTransponder);
+        inputShipCapacity = new JTextField(commandShipCapacity);
+        inputShipLength = new JTextField(commandShipLength);
+        inputShipBeam = new JTextField(commandShipBeam);
+        inputShipDraft = new JTextField(commandShipDraft);
+        inputShipLongitude = new JTextField(commandShipLongitude);
+        inputShipLatitude = new JTextField(commandShipLatitude);
+        inputShipRow = new JTextField(commandShipRow);
+        inputShipCol = new JTextField(commandShipCol);
+        //instatiates the buttons
+        okButton = new JButton(commandOkButton);
+        cancelButton = new JButton(commandCancelButton);
+        
+        
     }
     @Override
     public void actionPerformed(ActionEvent ae) {
