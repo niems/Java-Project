@@ -1,3 +1,4 @@
+
 /*
  * Zach Niemann
  * ID: 1000625866 
@@ -291,3 +292,4 @@ public class Dock {
         System.out.println("Location(" + MapConverter.lon2col(this.longitude) + ", " + MapConverter.lat2row(this.latitude) + ")\n");
     }
 }
+
