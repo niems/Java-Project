@@ -106,7 +106,7 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
         JTextField[] fields = {inputName,inputCountry,inputTransponder,inputCapacity,inputLength,inputBeam,inputDraft,inputLongitude,inputLatitude,inputRow,inputCol};
         
         createLabelAndFields(items,labels,fields);
-        //instatiates the buttons
+        //creates the buttons
         okButton = new JButton(commandOkButton);
         addComponent(okButton,14,2,1,1);
         positions.anchor = GridBagConstraints.CENTER;
