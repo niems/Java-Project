@@ -168,8 +168,8 @@ public class MenuFrame extends JFrame implements ActionListener{
         mapPanel.setPreferredSize(new Dimension(size.height - messageBox.getHeight(), size.width ));
         mapPanel.setBackground(Color.CYAN);
         
-        mapComponent = new MapComponent();
-        mapPanel.add(mapComponent);
+        //mapComponent = new MapComponent();
+       // mapPanel.add(mapComponent);
         
         this.add(mapPanel);
         

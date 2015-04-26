@@ -76,7 +76,7 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
         initShipPropertyDialog();
     }
     
-    private void initShipPropertyDialog()
+    public void initShipPropertyDialog()
     {
         rootLayout = new GridBagLayout();
         positions = new GridBagConstraints();
