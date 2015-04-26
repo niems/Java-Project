@@ -278,8 +278,10 @@ public class MenuFrame extends JFrame implements ActionListener{
         of all available ships. Once a ship has been slected, open a second dialog
         box that will allow the user to update the current ship properties.*/
 
-        UpdateShipsDialog usd = new UpdateShipsDialog(this,MenuFrame.map);
-        usd.setVisible(true);
+       // UpdateShipsDialog usd = new UpdateShipsDialog(this,MenuFrame.map);
+        //usd.setVisible(true);
+        ShipsPropertyDialog spd = new ShipsPropertyDialog(this, new CargoShip());
+        spd.setVisible(true);
     }
     
 
