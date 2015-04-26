@@ -19,7 +19,7 @@ import javax.swing.JComponent;
  * @author Niems
  */
 public class MapComponent extends JComponent{
-    
+    BufferedImage image;
     public MapComponent(){
         this.setLayout(new GridLayout(Map.mapRows, Map.mapCols, 0, 0));
         
@@ -52,13 +52,20 @@ public class MapComponent extends JComponent{
     
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(10,10);
+        if (image == null)
+        {
+            return new Dimension(800,600);
+        }
+        else
+        {
+            return new Dimension(600,600);
+        }
     }    
 	  
 	  
-    @Override
-    public void paint(Graphics g){
+
+    /*public void paint(Graphics g){
             super.paint(g);
-    }
+    }*/
     
 }

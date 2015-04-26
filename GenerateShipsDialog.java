@@ -52,9 +52,8 @@ public class GenerateShipsDialog extends JDialog implements ActionListener{
         positions = new GridBagConstraints();
         setLayout(rootLayout);// sets the window's layout
         
+
         
-        setSize(450,150);//sets the size of the window
-        setResizable(false);//stops the window from being resized
         positions.insets = new Insets(5,5,5,5); //pads the window 
         
         addComponent(prompt,0,0,1,3);// adds the label with the dimensions
@@ -71,6 +70,8 @@ public class GenerateShipsDialog extends JDialog implements ActionListener{
         setTitle("Generate Ships"); //names the window
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(getParent());
+        pack();
+        setResizable(false);//stops the window from being resized
     }
 
     

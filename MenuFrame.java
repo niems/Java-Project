@@ -85,7 +85,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         //Puts the group name on the window
         super("Byte Me Project");
         MenuFrame.this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        MenuFrame.this.getContentPane().setBackground(Color.WHITE);
+        //MenuFrame.this.getContentPane().setBackground(Color.WHITE);
         
         //creates the map and file handler to load in system files
         map = new Map();
@@ -152,27 +152,28 @@ public class MenuFrame extends JFrame implements ActionListener{
         
         messageBox.setLineWrap(true);
         JScrollPane scrollbar = new JScrollPane (messageBox, 
-        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);//puts it in a scrollpane with a vertical scrollbar
+        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);//puts it in a scrollpane with a vertical scrollbar
         this.add(scrollbar,BorderLayout.SOUTH);
         
 
         // Sets the size of the main window        
-        Dimension size = new Dimension(800,600);
-        this.setSize(size);
-        this.setVisible(true);
-        
+        Dimension size = new Dimension(620,460);
+        this.setPreferredSize(size);
+        //this.setResizable(false);
         
         //setup for the map in the center of the window
         mapPanel = new JPanel(); //creates the panel for the map
         mapPanel.setLayout(new GridLayout(1, 1, 0, 0));
         mapPanel.setPreferredSize(new Dimension(size.height - messageBox.getHeight(), size.width ));
-        mapPanel.setBackground(Color.CYAN);
+        //mapPanel.setBackground(Color.CYAN);
         
         mapComponent = new MapComponent();
         mapPanel.add(mapComponent);
         
         this.add(mapPanel);
-        
+        this.pack();
+        this.setVisible(true);
+ 
         
     }
 

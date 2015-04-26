@@ -87,12 +87,7 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
         positions = new GridBagConstraints();
         setLayout(rootLayout);
         
-        setModalityType(ModalityType.APPLICATION_MODAL); //sets the window's modality 
-        setTitle("Ship Properties"); //names the window
-        setSize(300, 425);
-        setResizable(false); 
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);// closes the window if the x is clicked
-        setLocationRelativeTo(getParent());//places the window in the center of the main window
+
         positions.insets = new Insets(4,4,4,4);// adds padding
         
         String[] items = {commandShipName, commandShipCountry, commandShipTransponder,
@@ -116,6 +111,12 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
         addComponent(cancelButton,14,3,1,1);
         positions.anchor = GridBagConstraints.CENTER;        
         cancelButton.addActionListener(this);
+        pack();
+        setResizable(false); 
+        setModalityType(ModalityType.APPLICATION_MODAL); //sets the window's modality 
+        setTitle("Ship Properties"); //names the window
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);// closes the window if the x is clicked
+        setLocationRelativeTo(getParent());//places the window in the center of the main window
 
     }
     private void addComponent(Component component,int row, int column, int width, int height)
@@ -138,14 +139,13 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
             //fields[i] = new JTextField(name[i]);// creates the textfields 
             fields[i] = new JTextField(10);
             addComponent(fields[i],i,2,20,20); //adds them to the rootlayout
-            fields[i].addActionListener(this);
+            fields[i].addActionListener(ShipsPropertyDialog.this);
         }
     }
     @Override
     public void actionPerformed(ActionEvent ae) {
 
-        Object source = null;
-        source =  ae.getSource();
+        Object source = ae.getSource();
         
         String tempName;
         String tempCountry;
@@ -170,50 +170,30 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
             try
             {
                 System.out.println("Ok pushed");
-                if (inputName.getText() != null)
-                {
-                    tempName = this.inputName.getText();
-                }
-                else if ( inputCountry.getText() != null)
-                {
-                    tempCountry = this.inputCountry.getText();
-                }
-                else if (inputTransponder.getText() != null)
-                {
-                    tempTransponder = this.inputTransponder.getText();
-                }
-                else if (inputCapacity.getText() != null)
-                {
-                    tempCapacity = this.inputCapacity.getText();
-                }
-                else if ( inputLength.getText() != null)
-                {        
-                    tempLength = this.inputLength.getText();
-                }    
-                else if ( inputDraft.getText() != null)
-                {
-                    tempDraft = this.inputDraft.getText();
-                }
-                else if ( inputBeam.getText() != null)
-                {
-                    tempBeam = this.inputBeam.getText();
-                }
-                else if (inputLongitude.getText() != null)
-                {
-                    tempLongitude = this.inputLongitude.getText();
-                }
-                else if (inputLatitude.getText() != null)
-                {
-                    tempLatitude = this.inputLatitude.getText();
-                }
-                else if (inputRow.getText() != null)
-                {    
-                    tempRow = this.inputRow.getText();
-                }
-                else if (inputCol.getText() != null)
-                {
-                    tempCol = this.inputCol.getText();
-                }
+
+                    tempName = inputName.getText();
+
+
+                    tempCountry = inputCountry.getText();
+
+                    tempTransponder = inputTransponder.getText();
+
+                    tempCapacity = inputCapacity.getText();
+      
+                    tempLength = inputLength.getText();
+
+                    tempDraft = inputDraft.getText();
+
+                    tempBeam = inputBeam.getText();
+
+                    tempLongitude = inputLongitude.getText();
+                
+                    tempLatitude = inputLatitude.getText();
+   
+                    tempRow = inputRow.getText();
+
+                    tempCol = inputCol.getText();
+                
                     /*transponder = Long.valueOf(tempTransponder);
                 capcitiy = Double.valueOf(tempCapacity);
                 length = Double.valueOf(tempLength);
