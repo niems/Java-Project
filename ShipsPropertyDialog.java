@@ -27,6 +27,7 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
    // Strings to return for the action listener and for displaying in the textfields 
     public final String commandOkButton = "OK";
     public final String commandCancelButton = "Canel";
+
     public final String commandShipName = " Name ";
     public final String commandShipCountry = " Country ";
     public final String commandShipTransponder = " Transponder ";
@@ -40,6 +41,7 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
     public final String commandShipCol = " Column ";
     public final String prompt = "Use the textfields to update the ships properties.";
     public final String tag = "Ship";
+
     private GridBagLayout rootLayout; // layout to hold all the components
     private GridBagConstraints positions;
     private JButton okButton;
