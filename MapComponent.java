@@ -24,18 +24,14 @@ public class MapComponent extends JComponent{
         this.setLayout(new GridLayout(Map.mapRows, Map.mapCols, 0, 0));
         
         TileComponent tile = null;
-        File seaFile = null;
-        File landFile = null;
         
         BufferedImage seaImage = null;
         BufferedImage landImage = null;
         
         try{
-            seaFile = new File("sea.png");
-            landFile = new File("land.png");
             
-            seaImage = ImageIO.read(seaFile);
-            landImage = ImageIO.read(landFile);
+            seaImage = ImageIO.read(new File("sea.png"));
+            landImage = ImageIO.read(new File("land.png"));
             
         }catch(IOException e){
             e.printStackTrace();
@@ -54,11 +50,11 @@ public class MapComponent extends JComponent{
     public Dimension getPreferredSize() {
         return new Dimension(10,10);
     }    
-	  
-	  
+	 
+    
     @Override
     public void paint(Graphics g){
             super.paint(g);
-    }
+    } 
     
 }

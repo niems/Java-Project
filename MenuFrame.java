@@ -157,23 +157,23 @@ public class MenuFrame extends JFrame implements ActionListener{
         
 
         // Sets the size of the main window        
-        Dimension size = new Dimension(800,600);
-        this.setSize(size);
-        this.setVisible(true);
-        
+        Dimension size = new Dimension(640,480);
+        this.setPreferredSize(size);
+        //this.setSize(size);
         
         //setup for the map in the center of the window
         mapPanel = new JPanel(); //creates the panel for the map
         mapPanel.setLayout(new GridLayout(1, 1, 0, 0));
         mapPanel.setPreferredSize(new Dimension(size.height - messageBox.getHeight(), size.width ));
-        mapPanel.setBackground(Color.CYAN);
+        //mapPanel.setBackground(Color.CYAN);
         
-        //mapComponent = new MapComponent();
-       // mapPanel.add(mapComponent);
+       mapComponent = new MapComponent();
+       mapPanel.add(mapComponent);
         
         this.add(mapPanel);
         
-        
+        this.pack();
+        this.setVisible(true);
     }
 
     @Override
