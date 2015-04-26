@@ -1,3 +1,4 @@
+
 /*
  * Zach Niemann
  * ID: 1000625866 
@@ -487,4 +488,5 @@ public class CargoShip {
     public void setSymbol(char symbol) {
         this.symbol = symbol;
     }
+
 }
