@@ -32,6 +32,7 @@ public class MenuFrame extends JFrame implements ActionListener{
     private JMenuItem menuItem; //used for all menu items
     
     private JPanel mapPanel; //used to display the map
+    private MapComponent mapComponent;
     
     private final JMenu fileMenu;
     private final JMenu menuShip;
@@ -157,6 +158,10 @@ public class MenuFrame extends JFrame implements ActionListener{
         mapPanel.setLayout(new GridLayout(1, 1, 0, 0));
         mapPanel.setPreferredSize(new Dimension(size.height - messageBox.getHeight(), size.width ));
         mapPanel.setBackground(Color.CYAN);
+        
+        mapComponent = new MapComponent();
+        mapPanel.add(mapComponent);
+        
         this.add(mapPanel);
         
         
