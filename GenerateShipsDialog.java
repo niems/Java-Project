@@ -27,7 +27,7 @@ public class GenerateShipsDialog extends JDialog implements ActionListener{
     
     public final String commandOkButton = "OK";
     public final String commandCancelButton = "Canel";
-    public final String commandShipAmount = "Ship Amount";
+
     
     private GridBagLayout rootLayout;
     private GridBagConstraints positions;
@@ -46,28 +46,24 @@ public class GenerateShipsDialog extends JDialog implements ActionListener{
         okButton = new JButton(commandOkButton);
         cancelButton = new JButton(commandCancelButton);
         prompt = new JLabel("Enter the amount of ships that will be generated.");
-        inputShip = new JTextField(commandShipAmount);
+        inputShip = new JTextField(5);
         
         rootLayout = new GridBagLayout();
         positions = new GridBagConstraints();
         setLayout(rootLayout);// sets the window's layout
         
         
-        setSize(500,150);//sets the size of the window
+        setSize(450,150);//sets the size of the window
         setResizable(false);//stops the window from being resized
         positions.insets = new Insets(5,5,5,5); //pads the window 
         
-        positions.fill= GridBagConstraints.PAGE_START; // defines the area in which the componet will be added
         addComponent(prompt,0,0,1,3);// adds the label with the dimensions
-
-        positions.fill = GridBagConstraints.FIRST_LINE_END;
         addComponent(inputShip,0,1,2,1);
         inputShip.addActionListener(this);
-        
-        positions.fill = GridBagConstraints.LAST_LINE_START;
+
         addComponent(okButton,3,1,1,1);
         okButton.addActionListener(this);
-        positions.fill = GridBagConstraints.LINE_END;
+
         addComponent(cancelButton,3,2,1,1);
         cancelButton.addActionListener(this);
         
@@ -95,23 +91,24 @@ public class GenerateShipsDialog extends JDialog implements ActionListener{
         String command =  e.getActionCommand();
         String shipData= inputShip.getText();
         int nShipAmount;
-        boolean valid = true;
-        if (command.equals(commandOkButton) && !commandShipAmount.equals(shipData) && map.getCurrentMap() != null )
+
+        if (command.equals(commandOkButton) && map.getCurrentMap() != null )
         {
             
-                try{
-                    nShipAmount = Integer.parseInt(shipData);//converts the string into a integer
-                    map.generateShips(nShipAmount);//passes it to the function
-                    dispose();//destroys the box
+            try
+            {
+                nShipAmount = Integer.parseInt(shipData);//converts the string into a integer
+                map.generateShips(nShipAmount);//passes it to the function
+                dispose();//destroys the box
                 
-                }
-                catch(NumberFormatException ex) //displays the an error dialog box if the input is not an integer
-                {
+            }
+            catch(NumberFormatException ex) //displays the an error dialog box if the input is not an integer
+            {
 
-                    String errorMessage = "Please enter only integer values.";
-                    JOptionPane.showMessageDialog(this, errorMessage, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
+                String errorMessage = "Please enter only integer values.";
+                JOptionPane.showMessageDialog(this, errorMessage, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
 
-                }
+            }
 
         }
         

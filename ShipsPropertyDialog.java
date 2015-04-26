@@ -25,21 +25,21 @@ import javax.swing.JTextField;
 public class ShipsPropertyDialog extends JDialog implements ActionListener{
     
    // Strings to return for the action listener and for displaying in the textfields 
-    public final static String commandOkButton = " OK ";
-    public final static String commandCancelButton = " Canel ";
-    public final static String commandShipName = " Name ";
-    public final static String commandShipCountry = " Country ";
-    public final static String commandShipTransponder = " Transponder ";
-    public final static String commandShipCapacity = " Capacity ";
-    public final static String commandShipLength = " Length ";            
-    public final static String commandShipBeam = " Beam ";
-    public final static String commandShipDraft = " Draft ";
-    public final static String commandShipLongitude = " Longitude ";
-    public final static String commandShipLatitude = " Latitude ";
-    public final static String commandShipRow = " Row ";
-    public final static String commandShipCol = " Column ";
-    public final static String prompt = "Use the textfields to update the ships properties.";
-    public final static String tag = "Ship";
+    public final String commandOkButton = "OK";
+    public final String commandCancelButton = "Canel";
+    public final String commandShipName = " Name ";
+    public final String commandShipCountry = " Country ";
+    public final String commandShipTransponder = " Transponder ";
+    public final String commandShipCapacity = " Capacity ";
+    public final String commandShipLength = " Length ";            
+    public final String commandShipBeam = " Beam ";
+    public final String commandShipDraft = " Draft ";
+    public final String commandShipLongitude = " Longitude ";
+    public final String commandShipLatitude = " Latitude ";
+    public final String commandShipRow = " Row ";
+    public final String commandShipCol = " Column ";
+    public final String prompt = "Use the textfields to update the ships properties.";
+    public final String tag = "Ship";
     private GridBagLayout rootLayout; // layout to hold all the components
     private GridBagConstraints positions;
     private JButton okButton;
@@ -69,6 +69,7 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
     private JLabel shipCol;
     private JTextField inputCol;
     private CargoShip ship;
+
     
     public ShipsPropertyDialog(MenuFrame menuFrame, CargoShip ship)
     {
@@ -86,10 +87,11 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
         
         setModalityType(ModalityType.APPLICATION_MODAL); //sets the window's modality 
         setTitle("Ship Properties"); //names the window
+        setSize(300, 425);
+        setResizable(false); 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);// closes the window if the x is clicked
         setLocationRelativeTo(getParent());//places the window in the center of the main window
-        
-        positions.insets = new Insets(4,4,4,4);
+        positions.insets = new Insets(4,4,4,4);// adds padding
         
         String[] items = {commandShipName, commandShipCountry, commandShipTransponder,
             commandShipCapacity, commandShipLength, commandShipBeam, commandShipDraft, 
@@ -104,10 +106,15 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
         createLabelAndFields(items,labels,fields);
         //instatiates the buttons
         okButton = new JButton(commandOkButton);
-        addComponent(okButton,12,1,0,0);
+        addComponent(okButton,14,2,1,1);
+        positions.anchor = GridBagConstraints.CENTER;
+        okButton.addActionListener(this);
+
         cancelButton = new JButton(commandCancelButton);
-        addComponent(cancelButton,12,2,0,0);
-        
+        addComponent(cancelButton,14,3,1,1);
+        positions.anchor = GridBagConstraints.CENTER;        
+        cancelButton.addActionListener(this);
+
     }
     private void addComponent(Component component,int row, int column, int width, int height)
     {
@@ -121,19 +128,121 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
     }
     public void createLabelAndFields(String[] name, JLabel[] labels, JTextField[] fields)
     {
-        int i = 0;
+        int i;
         for ( i = 0; i < name.length; i++)
         {
             labels[i] = new JLabel(tag + name[i]); //creates the labels
             addComponent(labels[i],i,1,1,2); // sets their position and adds them to the rootlayout
-            fields[i] = new JTextField(name[i]);// creates the textfields 
-            addComponent(fields[i],i,2,1,2); //adds them to the rootlayout
+            //fields[i] = new JTextField(name[i]);// creates the textfields 
+            fields[i] = new JTextField(10);
+            addComponent(fields[i],i,2,20,20); //adds them to the rootlayout
             fields[i].addActionListener(this);
         }
     }
     @Override
     public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        Object source = null;
+        source =  ae.getSource();
+        
+        String tempName;
+        String tempCountry;
+        String tempTransponder;
+        String tempCapacity;
+        String tempLength;
+        String tempDraft;
+        String tempBeam;
+        String tempLongitude;
+        String tempLatitude;
+        String tempRow;
+        String tempCol;
+
+        long transponder;
+        double capcitiy, length, draft, beam, longitude, latitude;
+        int row, column;
+        
+
+        if (source == okButton  )
+        {
+            
+            try
+            {
+                System.out.println("Ok pushed");
+                if (inputName.getText() != null)
+                {
+                    tempName = this.inputName.getText();
+                }
+                else if ( inputCountry.getText() != null)
+                {
+                    tempCountry = this.inputCountry.getText();
+                }
+                else if (inputTransponder.getText() != null)
+                {
+                    tempTransponder = this.inputTransponder.getText();
+                }
+                else if (inputCapacity.getText() != null)
+                {
+                    tempCapacity = this.inputCapacity.getText();
+                }
+                else if ( inputLength.getText() != null)
+                {        
+                    tempLength = this.inputLength.getText();
+                }    
+                else if ( inputDraft.getText() != null)
+                {
+                    tempDraft = this.inputDraft.getText();
+                }
+                else if ( inputBeam.getText() != null)
+                {
+                    tempBeam = this.inputBeam.getText();
+                }
+                else if (inputLongitude.getText() != null)
+                {
+                    tempLongitude = this.inputLongitude.getText();
+                }
+                else if (inputLatitude.getText() != null)
+                {
+                    tempLatitude = this.inputLatitude.getText();
+                }
+                else if (inputRow.getText() != null)
+                {    
+                    tempRow = this.inputRow.getText();
+                }
+                else if (inputCol.getText() != null)
+                {
+                    tempCol = this.inputCol.getText();
+                }
+                    /*transponder = Long.valueOf(tempTransponder);
+                capcitiy = Double.valueOf(tempCapacity);
+                length = Double.valueOf(tempLength);
+                draft = Double.valueOf(tempDraft);
+                beam = Double.valueOf(tempBeam);
+                longitude = Double.valueOf(tempLongitude);
+                latitude = Double.valueOf(tempLatitude);
+                row = Integer.valueOf(tempRow);
+                column = Integer.valueOf(tempCol);
+                dispose();//destroys the box*/
+                this.dispose();
+                
+            }
+            catch(NumberFormatException ex) //displays the an error dialog box if the input is not an integer
+            {
+                System.out.println("Cancel pushed.");
+                String errorMessage = "Please enter only integer values.";
+                JOptionPane.showMessageDialog(this, errorMessage, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
+
+            }
+
+        }
+        
+        else if(source == cancelButton ) //closes the dialog if the cancel button is clicked
+        {
+            this.dispose();
+        }
+
+        
+
+    
     }
     
 }
