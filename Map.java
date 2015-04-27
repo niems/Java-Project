@@ -305,7 +305,7 @@ public class Map {
     
     
 
-    public void generateShips( int size) throws NullPointerException {
+    public void generateShips(int size) throws NullPointerException {
 
         if(this.geoStatus != null){
             CargoShip cargoShip = null;

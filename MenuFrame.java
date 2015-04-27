@@ -312,8 +312,16 @@ public class MenuFrame extends JFrame implements ActionListener{
 
        // UpdateShipsDialog usd = new UpdateShipsDialog(this,MenuFrame.map);
         //usd.setVisible(true);
-        ShipsPropertyDialog spd = new ShipsPropertyDialog(this, new CargoShip());
-        spd.setVisible(true);
+        
+        if(MenuFrame.map.getCurrentShips().size() > 0){
+            ShipsPropertyDialog spd = new ShipsPropertyDialog(this, new CargoShip());
+            spd.setVisible(true);
+        }
+        
+        else{
+            this.messageBox.append("No ships to update.\n");
+        }
+        
     }
     
 
