@@ -65,7 +65,6 @@ public class MapComponent extends JComponent{
             
             validate();
             
-            
             if(valid[1] == 1){ //loaded port file successfully
                 for(int i = 0; i < map.getPort().getDock().size(); i++){
                     row = map.getPort().getDock().get(i).getRow();
@@ -130,6 +129,21 @@ public class MapComponent extends JComponent{
         
         
         
+    }
+    
+    public void updateShips(Map map){
+        TileComponent tile = null;
+        int removeIndex, row, column; //index to remove from the map
+        
+        try{
+            BufferedImage cargoShipImage = ImageIO.read(new File("cargoship.png"));
+            BufferedImage containerShipImage = ImageIO.read(new File("containership.png"));
+            BufferedImage oilTankerImage = ImageIO.read(new File("oiltanker.png"));
+            
+            
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
     
     @Override

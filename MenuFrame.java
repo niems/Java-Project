@@ -257,7 +257,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         //gets the info from the files
         String tag = JOptionPane.showInputDialog("Enter file tag: "); 
         MenuFrame.map.file = new FileHandler(map, tag); 
-        int[] valid = MenuFrame.map.file.loadAllFiles(MenuFrame.map);
+        int[] valid = MenuFrame.map.file.loadAllFiles(MenuFrame.map); //returns which files loaded
 
         //update graphically here
         if(valid[0] == 1) //only updates files if they were loaded correctly
@@ -277,8 +277,11 @@ public class MenuFrame extends JFrame implements ActionListener{
         MenuFrame.map.getPort().getDock().clear(); //erases all docks
         MenuFrame.map.getPort().getCargo().clear(); //erases all cargo
         MenuFrame.map.getSeamonsters().clear(); //erases all seamonsters
-        
-        //update graphically here
+                
+        //update graphically
+        this.mapComponent.removeAll(); //removes all components from map
+        this.mapComponent.validate();
+        this.mapComponent.repaint();
     }
     
     public void snapshot(){
@@ -293,6 +296,9 @@ public class MenuFrame extends JFrame implements ActionListener{
     {
         GenerateShipsDialog gsd = new GenerateShipsDialog(this,MenuFrame.map);
         gsd.setVisible(true);        
+        
+        //update graphically
+        
 
     }
     
