@@ -305,7 +305,7 @@ public class Map {
     
     
 
-    public void generateShips( int size) throws NullPointerException {
+    public void generateShips(int size) throws NullPointerException {
 
         if(this.geoStatus != null){
             CargoShip cargoShip = null;
@@ -330,22 +330,6 @@ public class Map {
             
             
             try{
-
-
-                /*do{
-=======
-                do{
->>>>>>> 97be854b4d79c8369d658420ba92056ad1a4a845
-                    System.out.print("Enter the number of ships to generate(1-10): ");
-                    System.out.flush();
-                    size = input.nextInt();
-
-                    if(size < 1 || size > 10){ 
-                        System.out.println("You must enter a number between 1 and 10.");
-                    }
-
-<<<<<<< HEAD
-                }while(size < 1 || size > 10);*/
 
                 for(i = 0; i < size; i++) { //creates the ships
 
@@ -374,6 +358,8 @@ public class Map {
                         cargoShip.setTransponder(randomNum); //generates new transponder number
                         cargoShip.setLatitude(latitude);
                         cargoShip.setLongitude(longitude);
+                        cargoShip.setRow(tempRow);
+                        cargoShip.setColumn(tempColumn);
                         this.currentShips.add(cargoShip);
                     }
                     else if(shipType == 1){
@@ -382,6 +368,8 @@ public class Map {
                         containerShip.setTransponder(randomNum); //generates new transponder number 
                         containerShip.setLatitude(latitude);
                         containerShip.setLongitude(longitude);
+                        containerShip.setRow(tempRow);
+                        containerShip.setColumn(tempColumn);
                         this.currentShips.add(containerShip);
                         
                     }
@@ -391,6 +379,8 @@ public class Map {
                         tanker.setTransponder(randomNum); //generates new transponder number
                         tanker.setLatitude(latitude);
                         tanker.setLongitude(longitude);
+                        tanker.setRow(tempRow);
+                        tanker.setColumn(tempColumn);
                         this.currentShips.add(tanker);
                     }
                 }

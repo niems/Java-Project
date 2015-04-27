@@ -43,9 +43,12 @@ public class FileHandler {
     }
     
     //loads all the files from the main menu
-    public void loadAllFiles(Map map) throws NullPointerException{
+    public int[] loadAllFiles(Map map) throws NullPointerException{
+        
+        int[] validity = {0, 0, 0}; //0 is invalid, 1 is a valid file
         
         try{
+            
             this.mapFile = new File(this.fileName + ".map.txt");
             this.portFile = new File(this.fileName + ".port.txt");
             this.shipFile = new File(this.fileName + ".ship.txt");
@@ -54,6 +57,7 @@ public class FileHandler {
             if(this.mapFile.exists()){
                 loadMapFile(map);
                 System.out.println("Map file successfully loaded.");
+                validity[0] = 1; //the file was loaded
             }
             else{
                 System.out.println("Failed to load map file.");
@@ -62,6 +66,7 @@ public class FileHandler {
             if(this.portFile.exists()){
                 loadPortFile(map);
                 System.out.println("Port file successfully loaded.");
+                validity[1] = 1; //the file was loaded
             }
             else{
                 System.out.println("Failed to load port file.");
@@ -70,6 +75,7 @@ public class FileHandler {
             if(this.shipFile.exists()){
                 loadShipFile(map);
                 System.out.println("Ship file successfully loaded.");
+                validity[2] = 1; //the file was loaded
             }  
             else{
                 System.out.println("Failed to load ship file.");
@@ -80,6 +86,8 @@ public class FileHandler {
         }catch(Exception e){
             e.printStackTrace();
         }
+        
+        return validity; //returns which files were loaded successfully
     }
     
     public void loadShipFile(Map map) throws FileNotFoundException{

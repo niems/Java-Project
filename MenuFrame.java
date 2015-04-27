@@ -38,7 +38,7 @@ public class MenuFrame extends JFrame implements ActionListener{
     private JMenuItem menuItem; //used for all menu items
     
     private JPanel mapPanel; //used to display the map
-    private MapComponent mapComponent;
+    private MapComponent mapComponent; //holds the map grid part of the gui
     
     private final JMenu fileMenu;
     private final JMenu menuShip;
@@ -157,9 +157,10 @@ public class MenuFrame extends JFrame implements ActionListener{
         
 
         // Sets the size of the main window        
-        Dimension size = new Dimension(800,600);
+
+        Dimension size = new Dimension(601, 587);
+
         this.setPreferredSize(size);
-        //this.setResizable(false);
         
         //setup for the map in the center of the window
         mapPanel = new JPanel(); //creates the panel for the map
@@ -167,10 +168,11 @@ public class MenuFrame extends JFrame implements ActionListener{
         mapPanel.setPreferredSize(new Dimension(size.height - messageBox.getHeight(), size.width ));
         //mapPanel.setBackground(Color.CYAN);
         
-        mapComponent = new MapComponent();
-        mapPanel.add(mapComponent);
+       mapComponent = new MapComponent();
+       mapPanel.add(mapComponent);
         
         this.add(mapPanel);
+        
         this.pack();
         this.setVisible(true);
  
@@ -254,18 +256,19 @@ public class MenuFrame extends JFrame implements ActionListener{
     /********FILE MENU**********/
     public void open(){ //loads the files
         
+        //gets the info from the files
+        String tag = JOptionPane.showInputDialog("Enter file tag: "); 
+        MenuFrame.map.file = new FileHandler(map, tag); 
+        int[] valid = MenuFrame.map.file.loadAllFiles(MenuFrame.map); //returns which files loaded
 
-            //gets the info from the files
-            String tag = JOptionPane.showInputDialog("Enter file tag: "); 
-            MenuFrame.map.file = new FileHandler(map, tag); 
-            MenuFrame.map.file.loadAllFiles(MenuFrame.map);
-
+        //update graphically here
+        if(valid[0] == 1) //only updates files if they were loaded correctly
+            this.mapComponent.updateBaseMap(map, valid);
+        
+        else{
             String fileNotFound = "The file can not be found.\n Please check if the file is in the correct directory.";
             JOptionPane.showMessageDialog(this, fileNotFound, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
-
-        
-        //update graphically here
-        
+        }
     }
     
     public void close(){ //erases all map info
@@ -276,8 +279,11 @@ public class MenuFrame extends JFrame implements ActionListener{
         MenuFrame.map.getPort().getDock().clear(); //erases all docks
         MenuFrame.map.getPort().getCargo().clear(); //erases all cargo
         MenuFrame.map.getSeamonsters().clear(); //erases all seamonsters
-        
-        //update graphically here
+                
+        //update graphically
+        this.mapComponent.removeAll(); //removes all components from map
+        this.mapComponent.validate();
+        this.mapComponent.repaint();
     }
     
     public void snapshot(){
@@ -290,9 +296,15 @@ public class MenuFrame extends JFrame implements ActionListener{
     /********SHIP MENU**********/
     public void generateShips()
     {
+        int[] valid = {1,1,1};
         GenerateShipsDialog gsd = new GenerateShipsDialog(this,MenuFrame.map);
         gsd.setVisible(true);        
-
+        
+        //update graphically
+        //this.mapComponent.updateShips(map);    
+        
+        if(map.getCurrentMap() != null)
+            this.mapComponent.updateBaseMap(map, valid);
     }
     
     public void updateShips(){
@@ -302,8 +314,17 @@ public class MenuFrame extends JFrame implements ActionListener{
 
        // UpdateShipsDialog usd = new UpdateShipsDialog(this,MenuFrame.map);
         //usd.setVisible(true);
-        ShipsPropertyDialog spd = new ShipsPropertyDialog(this,new CargoShip());
-        spd.setVisible(true);
+
+        
+        if(MenuFrame.map.getCurrentShips().size() > 0){
+            ShipsPropertyDialog spd = new ShipsPropertyDialog(this, new CargoShip());
+            spd.setVisible(true);
+        }
+        
+        else{
+            this.messageBox.append("No ships to update.\n");
+        }
+
     }
     
 
@@ -331,12 +352,16 @@ public class MenuFrame extends JFrame implements ActionListener{
         
         if (!MenuFrame.map.getCurrentShips().isEmpty())
         {
+            int[] valid = {1,1,1};
             MenuFrame.map.getCurrentShips().clear();
-            this.messageBox.setText("Ships have been removed.");
+            this.messageBox.setText("Ships have been removed.\n");
+            
+            if(map.getCurrentMap() != null)
+                this.mapComponent.updateBaseMap(map, valid);
         }
         else
         {
-            this.messageBox.append("No Ships to remove.");
+            this.messageBox.append("No Ships to remove.\n");
         }
     }
     
