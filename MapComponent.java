@@ -41,7 +41,7 @@ public class MapComponent extends JComponent{
             e.printStackTrace();
         }
         
-        for(int i = 0; i < Map.mapRows * Map.mapCols; i++){
+        for(int i = 0; i < Map.mapRows* Map.mapCols; i++){
            tile = new TileComponent(landImage);
            this.add(tile);
         }

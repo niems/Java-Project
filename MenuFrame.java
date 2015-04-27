@@ -157,7 +157,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         
 
         // Sets the size of the main window        
-        Dimension size = new Dimension(620,460);
+        Dimension size = new Dimension(800,600);
         this.setPreferredSize(size);
         //this.setResizable(false);
         
@@ -302,7 +302,7 @@ public class MenuFrame extends JFrame implements ActionListener{
 
        // UpdateShipsDialog usd = new UpdateShipsDialog(this,MenuFrame.map);
         //usd.setVisible(true);
-        ShipsPropertyDialog spd = new ShipsPropertyDialog(this, new CargoShip());
+        ShipsPropertyDialog spd = new ShipsPropertyDialog(this,new CargoShip());
         spd.setVisible(true);
     }
     
@@ -316,7 +316,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         if(MenuFrame.map.getCurrentShips().size() > 0){
             for(int i = 0; i < MenuFrame.map.getCurrentShips().size(); i++){
                 output = MenuFrame.map.getCurrentShips().get(i).toString() + "\n";
-                this.messageBox.append(output); //
+                this.messageBox.append(output); 
             }
         }
         

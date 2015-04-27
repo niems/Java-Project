@@ -47,30 +47,20 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
     private JButton okButton;
     private JButton cancelButton;
     
-    private JLabel instructions;
-    private JLabel shipName;
-    private JTextField inputName;
-    private JLabel shipCountry;
-    private JTextField inputCountry;
-    private JLabel shipTransponder;
-    private JTextField inputTransponder;
-    private JLabel shipCapacity;
-    private JTextField inputCapacity; 
-    private JLabel shipLength;
-    private JTextField inputLength;
-    private JLabel shipBeam;
-    private JTextField inputBeam;
-    private JLabel shipDraft;
-    private JTextField inputDraft;
-    private JLabel shipLongitude;
-    private JTextField inputLongitude;
-    private JLabel  shipLatitude;
-    private JTextField inputLatitude;
-    private JLabel shipRow;
-    private JTextField inputRow;
-    private JLabel shipCol;
-    private JTextField inputCol;
-    private CargoShip ship;
+
+    JTextField inputName;
+    JTextField inputCountry;
+    JTextField inputTransponder;
+    JTextField inputCapacity; 
+    JTextField inputLength;
+    JTextField inputBeam;
+    JTextField inputDraft;
+    JTextField inputLongitude;
+    JTextField inputLatitude;
+    JTextField inputRow;
+    JTextField inputCol;
+    CargoShip ship;
+
 
     
     public ShipsPropertyDialog(MenuFrame menuFrame, CargoShip ship)
@@ -87,30 +77,31 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
         positions = new GridBagConstraints();
         setLayout(rootLayout);
         
-
         positions.insets = new Insets(4,4,4,4);// adds padding
         
-        String[] items = {commandShipName, commandShipCountry, commandShipTransponder,
-            commandShipCapacity, commandShipLength, commandShipBeam, commandShipDraft, 
-            commandShipLongitude, commandShipLatitude, commandShipRow, commandShipCol};
-        JLabel[] labels = {shipName,shipCountry,
-            shipTransponder,  shipCapacity, 
-            shipLength,  shipBeam,  shipDraft, 
-            shipLongitude,  shipLatitude,  shipRow, 
-            shipCol, };
-        JTextField[] fields = {inputName,inputCountry,inputTransponder,inputCapacity,inputLength,inputBeam,inputDraft,inputLongitude,inputLatitude,inputRow,inputCol};
-        
-        createLabelAndFields(items,labels,fields);
+        //Creates the labels and textfields
+        inputName = makeTextField(commandShipName,0);
+        inputCountry = makeTextField(commandShipCountry,1);
+        inputTransponder = makeTextField(commandShipTransponder,2);
+        inputCapacity = makeTextField(commandShipCapacity,3);
+        inputLength = makeTextField(commandShipLength,4);
+        inputBeam = makeTextField(commandShipBeam,5);
+        inputDraft = makeTextField(commandShipDraft,6);
+        inputLongitude = makeTextField(commandShipLongitude,7);
+        inputLatitude = makeTextField(commandShipLatitude,8);
+        inputRow = makeTextField(commandShipRow,9);
+        inputCol = makeTextField(commandShipCol,10);
+
         //creates the buttons
         okButton = new JButton(commandOkButton);
-        addComponent(okButton,14,2,1,1);
-        positions.anchor = GridBagConstraints.CENTER;
         okButton.addActionListener(this);
+        addComponent(okButton,14,2,1,1);
 
         cancelButton = new JButton(commandCancelButton);
-        addComponent(cancelButton,14,3,1,1);
-        positions.anchor = GridBagConstraints.CENTER;        
         cancelButton.addActionListener(this);
+        addComponent(cancelButton,14,3,1,1);
+        
+
         pack();
         setResizable(false); 
         setModalityType(ModalityType.APPLICATION_MODAL); //sets the window's modality 
@@ -129,19 +120,17 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
         rootLayout.setConstraints(component,positions);
         add(component); //adds the component onto the layout
     }
-    public void createLabelAndFields(String[] name, JLabel[] labels, JTextField[] fields)
+
+    private JTextField makeTextField(String string,int num) 
     {
-        int i;
-        for ( i = 0; i < name.length; i++)
-        {
-            labels[i] = new JLabel(tag + name[i]); //creates the labels
-            addComponent(labels[i],i,1,1,2); // sets their position and adds them to the rootlayout
-            //fields[i] = new JTextField(name[i]);// creates the textfields 
-            fields[i] = new JTextField(10);
-            addComponent(fields[i],i,2,20,20); //adds them to the rootlayout
-            fields[i].addActionListener(ShipsPropertyDialog.this);
-        }
-    }
+        JTextField field = new JTextField(10);
+	JLabel label = new JLabel(tag + string);
+                
+	addComponent(field,num,2,20,20);
+	addComponent(label,num,1,1,2);
+
+	return field;
+}
     @Override
     public void actionPerformed(ActionEvent ae) {
 
@@ -155,8 +144,8 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
         String tempDraft;
         String tempBeam;
         String tempLongitude;
-        String tempLatitude;
-        String tempRow;
+        String tempLatitude ;
+        String tempRow ;
         String tempCol;
 
         long transponder;
@@ -167,64 +156,106 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
         if (source == okButton  )
         {
             
-            try
-            {
+        
                 System.out.println("Ok pushed");
 
-                    tempName = inputName.getText();
+                tempName = this.inputName.getText();
+                tempCountry = this.inputCountry.getText();
+                tempTransponder = this.inputTransponder.getText();
+                tempCapacity = this.inputCapacity.getText();
+                tempLength = this.inputLength.getText();
+                tempDraft = this.inputDraft.getText();
+                tempBeam = this.inputBeam.getText();
+                tempLongitude = this.inputLongitude.getText();
+                tempLatitude = this.inputLatitude.getText();
+                tempRow = this.inputRow.getText();
+                tempCol = this.inputCol.getText();
 
+                try
+                {
+                if (!tempName.isEmpty())
+                {
+                    ship.setName(tempName);
+                    System.out.println("name");
+                }
+                else if ( !tempCountry.isEmpty())
+                {
+                    ship.setCountry(tempCountry);
+                    System.out.println("country");
+                }
+                else if (!tempTransponder.isEmpty())
+                {
+                    transponder = Long.valueOf(tempTransponder);
+                    System.out.println("transponder");
+                    ship.setTransponder(transponder);
+                }
+                else if (!tempCapacity.isEmpty())
+                {   
+                    capcitiy = Double.valueOf(tempCapacity);
+                    System.out.println("capicity");
+                    ship.setCapacity(capcitiy);
+                }
+                else if (!tempLength.isEmpty())
+                {   
+                    length = Double.valueOf(tempLength);
+                    System.out.println("length");
+                    ship.setLength(length);
+                }
+                else if ( !tempDraft.isEmpty())
+                {
+                    draft = Double.valueOf(tempDraft);
+                    System.out.println("draft");
+                    ship.setDraft(draft);
+                }
+                else if ( !tempBeam.isEmpty())
+                {
+                    beam = Double.valueOf(tempBeam);
+                    System.out.println("beam");
+                    ship.setBeam(beam);
+                }
+                else if (!tempCol.isEmpty() && !tempLongitude.isEmpty() || !tempRow.isEmpty() && tempLatitude.isEmpty() )
+                {
+                    String errorMessage = "Error. You can change the position using rows and columns\n or longitude and latitude but not both.";
+                    JOptionPane.showMessageDialog(this, errorMessage, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
+                }
+                else if (!tempLongitude.isEmpty() && tempCol.isEmpty())
+                {
+                    longitude = Double.valueOf(tempLongitude);
+                    System.out.println("longitude");
+                    ship.setLongitude(longitude);
+                }
+                else if (!tempLatitude.isEmpty() && tempRow.isEmpty())
+                {
+                    latitude = Double.valueOf(tempLatitude);
+                    System.out.println("latitude");
+                    ship.setLatitude(latitude);
+                }
+                else if (!tempRow.isEmpty() && tempLatitude.isEmpty())
+                {
+                    row = Integer.valueOf(tempRow);
+                    System.out.println("row");
+                    ship.setLatitude(MapConverter.row2lat(row));
+                }
+                else if (!tempCol.isEmpty() && tempLongitude.isEmpty())
+                {
+                    column = Integer.valueOf(tempCol);
+                    System.out.println("column");
+                    ship.setLongitude(MapConverter.col2lon(column));
+                }
 
-                    tempCountry = inputCountry.getText();
-
-                    tempTransponder = inputTransponder.getText();
-
-                    tempCapacity = inputCapacity.getText();
-      
-                    tempLength = inputLength.getText();
-
-                    tempDraft = inputDraft.getText();
-
-                    tempBeam = inputBeam.getText();
-
-                    tempLongitude = inputLongitude.getText();
                 
-                    tempLatitude = inputLatitude.getText();
-   
-                    tempRow = inputRow.getText();
-
-                    tempCol = inputCol.getText();
-                
-                    /*transponder = Long.valueOf(tempTransponder);
-                capcitiy = Double.valueOf(tempCapacity);
-                length = Double.valueOf(tempLength);
-                draft = Double.valueOf(tempDraft);
-                beam = Double.valueOf(tempBeam);
-                longitude = Double.valueOf(tempLongitude);
-                latitude = Double.valueOf(tempLatitude);
-                row = Integer.valueOf(tempRow);
-                column = Integer.valueOf(tempCol);
-                dispose();//destroys the box*/
                 this.dispose();
                 
-            }
-            catch(NumberFormatException ex) //displays the an error dialog box if the input is not an integer
-            {
-                System.out.println("Cancel pushed.");
-                String errorMessage = "Please enter only integer values.";
-                JOptionPane.showMessageDialog(this, errorMessage, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
-
-            }
+            
 
         }
         
         else if(source == cancelButton ) //closes the dialog if the cancel button is clicked
         {
+            System.out.println("Cancel pushed.");
             this.dispose();
         }
 
-        
-
-    
     }
     
 }
