@@ -173,81 +173,87 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
 
                 try
                 {
-                if (!tempName.isEmpty())
-                {
-                    ship.setName(tempName);
-                    System.out.println("name");
-                }
-                else if ( !tempCountry.isEmpty())
-                {
-                    ship.setCountry(tempCountry);
-                    System.out.println("country");
-                }
-                else if (!tempTransponder.isEmpty())
-                {
-                    transponder = Long.valueOf(tempTransponder);
-                    System.out.println("transponder");
-                    ship.setTransponder(transponder);
-                }
-                else if (!tempCapacity.isEmpty())
-                {   
-                    capcitiy = Double.valueOf(tempCapacity);
-                    System.out.println("capicity");
-                    ship.setCapacity(capcitiy);
-                }
-                else if (!tempLength.isEmpty())
-                {   
-                    length = Double.valueOf(tempLength);
-                    System.out.println("length");
-                    ship.setLength(length);
-                }
-                else if ( !tempDraft.isEmpty())
-                {
-                    draft = Double.valueOf(tempDraft);
-                    System.out.println("draft");
-                    ship.setDraft(draft);
-                }
-                else if ( !tempBeam.isEmpty())
-                {
-                    beam = Double.valueOf(tempBeam);
-                    System.out.println("beam");
-                    ship.setBeam(beam);
-                }
-                else if (!tempCol.isEmpty() && !tempLongitude.isEmpty() || !tempRow.isEmpty() && tempLatitude.isEmpty() )
-                {
-                    String errorMessage = "Error. You can change the position using rows and columns\n or longitude and latitude but not both.";
-                    JOptionPane.showMessageDialog(this, errorMessage, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
-                }
-                else if (!tempLongitude.isEmpty() && tempCol.isEmpty())
-                {
-                    longitude = Double.valueOf(tempLongitude);
-                    System.out.println("longitude");
-                    ship.setLongitude(longitude);
-                }
-                else if (!tempLatitude.isEmpty() && tempRow.isEmpty())
-                {
-                    latitude = Double.valueOf(tempLatitude);
-                    System.out.println("latitude");
-                    ship.setLatitude(latitude);
-                }
-                else if (!tempRow.isEmpty() && tempLatitude.isEmpty())
-                {
-                    row = Integer.valueOf(tempRow);
-                    System.out.println("row");
-                    ship.setLatitude(MapConverter.row2lat(row));
-                }
-                else if (!tempCol.isEmpty() && tempLongitude.isEmpty())
-                {
-                    column = Integer.valueOf(tempCol);
-                    System.out.println("column");
-                    ship.setLongitude(MapConverter.col2lon(column));
-                }
+                    if (!tempName.isEmpty())
+                    {
+                        ship.setName(tempName);
+                        System.out.println("name");
+                    }
+                    else if ( !tempCountry.isEmpty())
+                    {
+                        ship.setCountry(tempCountry);
+                        System.out.println("country");
+                    }
+                    else if (!tempTransponder.isEmpty())
+                    {
+                        transponder = Long.valueOf(tempTransponder);
+                        System.out.println("transponder");
+                        ship.setTransponder(transponder);
+                    }
+                    else if (!tempCapacity.isEmpty())
+                    {   
+                        capcitiy = Double.valueOf(tempCapacity);
+                        System.out.println("capicity");
+                        ship.setCapacity(capcitiy);
+                    }
+                    else if (!tempLength.isEmpty())
+                    {   
+                        length = Double.valueOf(tempLength);
+                        System.out.println("length");
+                        ship.setLength(length);
+                    }
+                    else if ( !tempDraft.isEmpty())
+                    {
+                        draft = Double.valueOf(tempDraft);
+                        System.out.println("draft");
+                        ship.setDraft(draft);
+                    }
+                    else if ( !tempBeam.isEmpty())
+                    {
+                        beam = Double.valueOf(tempBeam);
+                        System.out.println("beam");
+                        ship.setBeam(beam);
+                    }
+                     else if (!tempCol.isEmpty() && !tempLongitude.isEmpty() || !tempRow.isEmpty() && tempLatitude.isEmpty() )
+                    {
+                        String errorMessage = "Error. You can change the position using rows and columns\n or longitude and latitude but not both.";
+                        JOptionPane.showMessageDialog(this, errorMessage, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
+                     }
+                    else if (!tempLongitude.isEmpty() && tempCol.isEmpty())
+                    {
+                        longitude = Double.valueOf(tempLongitude);
+                        System.out.println("longitude");
+                        ship.setLongitude(longitude);
+                    }
+                    else if (!tempLatitude.isEmpty() && tempRow.isEmpty())
+                     {
+                        latitude = Double.valueOf(tempLatitude);
+                        System.out.println("latitude");
+                        ship.setLatitude(latitude);
+                    }
+                    else if (!tempRow.isEmpty() && tempLatitude.isEmpty())
+                    {
+                        row = Integer.valueOf(tempRow);
+                        System.out.println("row");
+                        ship.setLatitude(MapConverter.row2lat(row));
+                    }
+                    else if (!tempCol.isEmpty() && tempLongitude.isEmpty())
+                    {
+                        column = Integer.valueOf(tempCol);
+                        System.out.println("column");
+                        ship.setLongitude(MapConverter.col2lon(column));
+                    }
 
                 
-                this.dispose();
-                
+                    this.dispose();
+                }
+            catch (NumberFormatException  nfe)
+            {        
+                String errorMessage = "Please enter only integer values.";
+                JOptionPane.showMessageDialog(this, errorMessage, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
+            }
             
 
+        
         }
         
         else if(source == cancelButton ) //closes the dialog if the cancel button is clicked

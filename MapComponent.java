@@ -126,15 +126,7 @@ public class MapComponent extends JComponent{
         }catch(IOException e){
             e.printStackTrace();
         }
-        
 
-        for(int i = 0; i < Map.mapRows* Map.mapCols; i++){
-           tile = new TileComponent(landImage);
-           this.add(tile);
-        }
-
-        
-        
     }
     
     public void updateShips(Map map){

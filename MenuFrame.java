@@ -152,7 +152,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         
         messageBox.setLineWrap(true);
         JScrollPane scrollbar = new JScrollPane (messageBox, 
-        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);//puts it in a scrollpane with a vertical scrollbar
+        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);//puts it in a scrollpane with a vertical scrollbar
         this.add(scrollbar,BorderLayout.SOUTH);
         
 
@@ -257,7 +257,7 @@ public class MenuFrame extends JFrame implements ActionListener{
     public void open(){ //loads the files
         
         //gets the info from the files
-        String tag = JOptionPane.showInputDialog("Enter file tag: "); 
+        String tag = JOptionPane.showInputDialog(this,"Enter file tag: "); 
         MenuFrame.map.file = new FileHandler(map, tag); 
         int[] valid = MenuFrame.map.file.loadAllFiles(MenuFrame.map); //returns which files loaded
 
@@ -312,8 +312,8 @@ public class MenuFrame extends JFrame implements ActionListener{
         of all available ships. Once a ship has been slected, open a second dialog
         box that will allow the user to update the current ship properties.*/
 
-       // UpdateShipsDialog usd = new UpdateShipsDialog(this,MenuFrame.map);
-        //usd.setVisible(true);
+        UpdateShipsDialog usd = new UpdateShipsDialog(this,MenuFrame.map);
+        usd.setVisible(true);
 
         
         if(MenuFrame.map.getCurrentShips().size() > 0){
