@@ -294,12 +294,15 @@ public class MenuFrame extends JFrame implements ActionListener{
     /********SHIP MENU**********/
     public void generateShips()
     {
+        int[] valid = {1,1,1};
         GenerateShipsDialog gsd = new GenerateShipsDialog(this,MenuFrame.map);
         gsd.setVisible(true);        
         
         //update graphically
+        //this.mapComponent.updateShips(map);    
         
-
+        if(map.getCurrentMap() != null)
+            this.mapComponent.updateBaseMap(map, valid);
     }
     
     public void updateShips(){
@@ -338,12 +341,16 @@ public class MenuFrame extends JFrame implements ActionListener{
         
         if (!MenuFrame.map.getCurrentShips().isEmpty())
         {
+            int[] valid = {1,1,1};
             MenuFrame.map.getCurrentShips().clear();
-            this.messageBox.setText("Ships have been removed.");
+            this.messageBox.setText("Ships have been removed.\n");
+            
+            if(map.getCurrentMap() != null)
+                this.mapComponent.updateBaseMap(map, valid);
         }
         else
         {
-            this.messageBox.append("No Ships to remove.");
+            this.messageBox.append("No Ships to remove.\n");
         }
     }
     

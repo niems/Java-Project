@@ -27,6 +27,8 @@ public class CargoShip {
     protected double draft; //depth of the ship, in meters
     protected double longitude; //longitude of the ship, in degrees
     protected double latitude; //latitude of the ship, in degrees
+    protected int row; //current row of the ship
+    protected int column; //current column of the ship
     protected char symbol; //ship symbol
     
     public CargoShip() { //default ship values
@@ -41,6 +43,8 @@ public class CargoShip {
         this.longitude = -2.977838;
         this.latitude = 53.410777; 
         this.symbol = 'S'; //cargo ship symbol
+        this.row = 0;
+        this.column = 0;
     }
     
     public CargoShip(String name, String country, long transponder, double cargoCapacity, double length, double beam, double draft, double longitude, double latitude){
@@ -55,6 +59,8 @@ public class CargoShip {
         this.longitude = longitude;
         this.latitude = latitude;
         this.symbol = 'S'; //cargo ship symbol
+        this.row = 0;
+        this.column = 0;
     }
     
     public CargoShip(String values){ //name,country,transponder,capacity,length,beam,draft,longitude,latitude
@@ -72,6 +78,8 @@ public class CargoShip {
         this.longitude = Double.valueOf(parts[7]);
         this.latitude = Double.valueOf(parts[8]);     
         this.symbol = 'S'; //cargo ship symbol
+        this.row = 0;
+        this.column = 0;
     }
     
     public boolean shipCollision(int currentIteration, Map map){ //checks for ship collision with current ship
@@ -143,11 +151,11 @@ public class CargoShip {
     }
     
     public int getRow(){ //gets the current row of the ship
-        return(MapConverter.lat2row(this.latitude));
+        return(this.row);
     }
     
     public int getColumn(){ //gets the current column of the ship
-        return(MapConverter.lon2col(this.longitude));
+        return(this.column);
     }
     
     public String getName() { //returns the current ship name
@@ -434,6 +442,14 @@ public class CargoShip {
     
     public void setLatitude(double latitude) { //sets the latitude of the ship in degrees
         this.latitude = latitude;
+    }
+    
+    public void setRow(int row){
+       this.row = row;
+    }
+    
+    public void setColumn(int column){
+        this.column = column;
     }
     
     public String toString(){

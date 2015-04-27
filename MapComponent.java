@@ -139,6 +139,49 @@ public class MapComponent extends JComponent{
             BufferedImage cargoShipImage = ImageIO.read(new File("cargoship.png"));
             BufferedImage containerShipImage = ImageIO.read(new File("containership.png"));
             BufferedImage oilTankerImage = ImageIO.read(new File("oiltanker.png"));
+            BufferedImage unsafeShipImage = ImageIO.read(new File("unsafe.png"));
+            BufferedImage unloadShipImage = ImageIO.read(new File("safe.png"));
+            
+            for(int i = 0; i < map.getCurrentShips().size(); i++){
+                row = map.getCurrentShips().get(i).getRow();
+                column = map.getCurrentShips().get(i).getColumn();
+                
+                removeIndex = (row * Map.mapCols) + column; //current dock location
+                this.remove(removeIndex); //removes current component
+                
+                //if the ship is unsafe
+                if(map.getCurrentMap()[row][column].equals(String.valueOf(map.getUnsafeShip()))){
+                    tile = new TileComponent(unsafeShipImage);
+                    this.add(tile, removeIndex);
+                }
+                
+                //if the ship is at the correct type of dock and is ready to be unloaded
+                else if(map.getCurrentMap()[row][column].equals(String.valueOf(map.getShipReadyToUnload()))){
+                    tile = new TileComponent(unloadShipImage);
+                    this.add(tile, removeIndex);
+                }
+                
+                //if the ship is safe at sea and is a cargo ship
+                else if(map.getCurrentMap()[row][column].equals(String.valueOf(map.getCargoShipSafeAtSea()))){
+                    tile = new TileComponent(cargoShipImage);
+                    this.add(tile, removeIndex);
+                }
+                
+                //if the ship is safe at sea and is a container ship
+                else if(map.getCurrentMap()[row][column].equals(String.valueOf(map.getContainerShipSafeAtSea()))){
+                    tile = new TileComponent(containerShipImage);
+                    this.add(tile, removeIndex);
+                }
+                
+                //if the ship is safe at sea and is a oil tanker
+                else if(map.getCurrentMap()[row][column].equals(String.valueOf(map.getTankerSafeAtSea()))){
+                    tile = new TileComponent(oilTankerImage);
+                    this.add(tile, removeIndex);
+                }
+            }
+            
+            validate();
+            //repaint();
             
             
         }catch(IOException e){
