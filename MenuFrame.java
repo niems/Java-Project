@@ -157,9 +157,8 @@ public class MenuFrame extends JFrame implements ActionListener{
         
 
         // Sets the size of the main window        
-        Dimension size = new Dimension(640,480);
+        Dimension size = new Dimension(601, 587);
         this.setPreferredSize(size);
-        //this.setSize(size);
         
         //setup for the map in the center of the window
         mapPanel = new JPanel(); //creates the panel for the map
@@ -258,15 +257,16 @@ public class MenuFrame extends JFrame implements ActionListener{
         //gets the info from the files
         String tag = JOptionPane.showInputDialog("Enter file tag: "); 
         MenuFrame.map.file = new FileHandler(map, tag); 
-        MenuFrame.map.file.loadAllFiles(MenuFrame.map);
-
-        /*
-        String fileNotFound = "The file can not be found.\n Please check if the file is in the correct directory.";
-        JOptionPane.showMessageDialog(this, fileNotFound, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
-        */
+        int[] valid = MenuFrame.map.file.loadAllFiles(MenuFrame.map);
 
         //update graphically here
-        this.mapComponent.updateBaseMap(map);
+        if(valid[0] == 1) //only updates files if they were loaded correctly
+            this.mapComponent.updateBaseMap(map, valid);
+        
+        else{
+            String fileNotFound = "The file can not be found.\n Please check if the file is in the correct directory.";
+            JOptionPane.showMessageDialog(this, fileNotFound, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
+        }
     }
     
     public void close(){ //erases all map info
