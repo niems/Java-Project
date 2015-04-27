@@ -38,7 +38,7 @@ public class MenuFrame extends JFrame implements ActionListener{
     private JMenuItem menuItem; //used for all menu items
     
     private JPanel mapPanel; //used to display the map
-    private MapComponent mapComponent;
+    private MapComponent mapComponent; //holds the map grid part of the gui
     
     private final JMenu fileMenu;
     private final JMenu menuShip;
@@ -85,7 +85,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         //Puts the group name on the window
         super("Byte Me Project");
         MenuFrame.this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        MenuFrame.this.getContentPane().setBackground(Color.WHITE);
+        //MenuFrame.this.getContentPane().setBackground(Color.WHITE);
         
         //creates the map and file handler to load in system files
         map = new Map();
@@ -152,7 +152,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         
         messageBox.setLineWrap(true);
         JScrollPane scrollbar = new JScrollPane (messageBox, 
-        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);//puts it in a scrollpane with a vertical scrollbar
+        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);//puts it in a scrollpane with a vertical scrollbar
         this.add(scrollbar,BorderLayout.SOUTH);
         
 
@@ -174,6 +174,8 @@ public class MenuFrame extends JFrame implements ActionListener{
         
         this.pack();
         this.setVisible(true);
+ 
+        
     }
 
     @Override
@@ -253,18 +255,18 @@ public class MenuFrame extends JFrame implements ActionListener{
     /********FILE MENU**********/
     public void open(){ //loads the files
         
+        //gets the info from the files
+        String tag = JOptionPane.showInputDialog("Enter file tag: "); 
+        MenuFrame.map.file = new FileHandler(map, tag); 
+        MenuFrame.map.file.loadAllFiles(MenuFrame.map);
 
-            //gets the info from the files
-            String tag = JOptionPane.showInputDialog("Enter file tag: "); 
-            MenuFrame.map.file = new FileHandler(map, tag); 
-            MenuFrame.map.file.loadAllFiles(MenuFrame.map);
+        /*
+        String fileNotFound = "The file can not be found.\n Please check if the file is in the correct directory.";
+        JOptionPane.showMessageDialog(this, fileNotFound, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
+        */
 
-            String fileNotFound = "The file can not be found.\n Please check if the file is in the correct directory.";
-            JOptionPane.showMessageDialog(this, fileNotFound, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
-
-        
         //update graphically here
-        
+        this.mapComponent.updateBaseMap(map);
     }
     
     public void close(){ //erases all map info
@@ -299,8 +301,10 @@ public class MenuFrame extends JFrame implements ActionListener{
         of all available ships. Once a ship has been slected, open a second dialog
         box that will allow the user to update the current ship properties.*/
 
-        UpdateShipsDialog usd = new UpdateShipsDialog(this,MenuFrame.map);
-        usd.setVisible(true);
+       // UpdateShipsDialog usd = new UpdateShipsDialog(this,MenuFrame.map);
+        //usd.setVisible(true);
+        ShipsPropertyDialog spd = new ShipsPropertyDialog(this, new CargoShip());
+        spd.setVisible(true);
     }
     
 
