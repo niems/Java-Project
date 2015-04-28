@@ -8,6 +8,8 @@ package pkgbyte.me;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.InputMismatchException;
@@ -25,13 +27,22 @@ public class FileHandler {
     private String currentLine; //current line read in from file
     private String fileName; //stores the base of the file name. ex. 'simple'
                              //used for all files. ex. fileName.category.txt
+    private int totalDocks;
+    private int totalCranes;
+    private int totalPiers;
+    private int totalCargo;
     
     FileHandler(Map map) {
         this.mapFile = null;
         this.shipFile = null;
         this.portFile = null;
         this.currentLine = null;
-        this.fileName = null;      
+        this.fileName = null;    
+        
+        totalDocks = 0;
+        totalCranes = 0;
+        totalPiers = 0;
+        totalCargo = 0;
     }
     
     FileHandler(Map map, String fileName){
@@ -40,12 +51,20 @@ public class FileHandler {
         this.portFile = null;
         this.currentLine = null;
         this.fileName = fileName;
+        
+        totalDocks = 0;
+        totalCranes = 0;
+        totalPiers = 0;
+        totalCargo = 0;
     }
     
     //loads all the files from the main menu
-    public void loadAllFiles(Map map) throws NullPointerException{
+    public int[] loadAllFiles(Map map) throws NullPointerException{
+        
+        int[] validity = {0, 0, 0}; //0 is invalid, 1 is a valid file
         
         try{
+            
             this.mapFile = new File(this.fileName + ".map.txt");
             this.portFile = new File(this.fileName + ".port.txt");
             this.shipFile = new File(this.fileName + ".ship.txt");
@@ -54,6 +73,7 @@ public class FileHandler {
             if(this.mapFile.exists()){
                 loadMapFile(map);
                 System.out.println("Map file successfully loaded.");
+                validity[0] = 1; //the file was loaded
             }
             else{
                 System.out.println("Failed to load map file.");
@@ -62,6 +82,7 @@ public class FileHandler {
             if(this.portFile.exists()){
                 loadPortFile(map);
                 System.out.println("Port file successfully loaded.");
+                validity[1] = 1; //the file was loaded
             }
             else{
                 System.out.println("Failed to load port file.");
@@ -70,6 +91,7 @@ public class FileHandler {
             if(this.shipFile.exists()){
                 loadShipFile(map);
                 System.out.println("Ship file successfully loaded.");
+                validity[2] = 1; //the file was loaded
             }  
             else{
                 System.out.println("Failed to load ship file.");
@@ -80,6 +102,8 @@ public class FileHandler {
         }catch(Exception e){
             e.printStackTrace();
         }
+        
+        return validity; //returns which files were loaded successfully
     }
     
     public void loadShipFile(Map map) throws FileNotFoundException{
@@ -169,10 +193,7 @@ public class FileHandler {
         Scanner finput;
         String currentLine;
         String[] part;
-        int totalDocks = 0;
-        int totalCranes = 0;
-        int totalPiers = 0;
-        int totalCargo = 0;
+       
         
         
         try{
@@ -217,5 +238,74 @@ public class FileHandler {
             e.printStackTrace();
         }
     }
+    
+    public void saveAllFiles(Map map, String fileName){
+    	
+    	try{
+            
+    		PrintWriter writer = new PrintWriter(fileName + ".map.txt", "UTF-8");
+    		saveMapFile(map, writer);
+    		writer.close();
+    		
+    		writer = new PrintWriter(fileName + ".port.txt", "UTF-8");
+    		savePortFile(map, writer);
+    		writer.close();
+    		
+    		writer = new PrintWriter(fileName + ".ship.txt", "UTF-8");
+    		saveShipFile(map, writer);
+    		writer.close();
+    		
+    		writer = new PrintWriter(fileName + ".monster.txt", "UTF-8");
+    		saveMonsterFile(map, writer);
+    		writer.close();
+
+        }catch(FileNotFoundException e){
+            System.out.println("A File could not be written to.");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void saveShipFile(Map map, PrintWriter shipOut){
+    	int i;
+    	
+    	for(i=0; i<map.getCurrentShips().size(); i++){
+    		shipOut.println(map.getCurrentShips().get(i).toString());
+    	}
+    }
+    
+    public void saveMapFile(Map map, PrintWriter mapOut){
+    	int i, j;
+    	
+    	for(i=0; i<Map.mapRows; i++){
+    		for(j=0; j<Map.mapCols; j++){
+    			mapOut.println(j+","+i+","+map.getGeoStatus()[i][j]);
+    		}
+    	}
+    	System.out.printf("Map file successfully saved.\n");
+    }
+
+	public void savePortFile(Map map, PrintWriter portOut){
+		int i;
+		
+		String name = map.getPort().getName();
+		portOut.println(name + ", " + totalDocks + "," + totalCranes + "," + totalPiers + "," + totalCargo);
+		
+		for(i=0; i<map.getPort().getDock().size(); i++){
+			portOut.println(map.getPort().getDock().get(i).toString());
+		}
+		
+		for(i=0; i<map.getPort().getCargo().size(); i++){
+			portOut.println(map.getPort().getCargo().toString());
+		}
+	}
+
+	public void saveMonsterFile(Map map, PrintWriter monsterOut){
+		int i;
+		
+		for(i=0; i<map.getSeamonsters().size(); i++){
+			monsterOut.println(map.getSeamonsters().get(i).toString());
+		}
+	}
 }
 
