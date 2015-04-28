@@ -434,6 +434,18 @@ public class MenuFrame extends JFrame implements ActionListener{
         /*Prompt the user with a dialog box with a list item contatining the current
         monsters. Once a monster has been selected, open a second dialog box that will
         allow the user to update the current monster properties*/
+        
+        int[] valid = {1, 1, 1};
+        
+        if(map.getGeoStatus() != null){
+            
+            this.mapComponent.updateBaseMap(map, valid);
+        }
+        
+        else{
+            String error = "Please load the map before trying to generate monsters.\n";
+            JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     public void displayAllMonsters(){
@@ -457,10 +469,11 @@ public class MenuFrame extends JFrame implements ActionListener{
     
     public void removeAllMonsters(){
         /*Remove all monsters from the map*/
-
+        int[] valid = {1, 1, 1};
         
         if(MenuFrame.map.getSeamonsters().size() > 0){
             MenuFrame.map.getSeamonsters().clear();
+            this.mapComponent.updateBaseMap(map, valid);
             this.messageBox.append("Sea monsters successfully removed.\n");
         }
         
@@ -474,6 +487,10 @@ public class MenuFrame extends JFrame implements ActionListener{
     public void summonGodzilla(){
         /*Put Godzilla on the map. Prompt the user for the location of where Godzilla
         would appear. Godzilla, being an amphibian, can be on either land or water.*/
+        
+        if(map.getGodzilla() == null){
+            
+        }
     }
     
     /*********ABOUT***************/
