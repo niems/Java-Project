@@ -312,13 +312,12 @@ public class MenuFrame extends JFrame implements ActionListener{
         of all available ships. Once a ship has been slected, open a second dialog
         box that will allow the user to update the current ship properties.*/
 
-        UpdateShipsDialog usd = new UpdateShipsDialog(this,MenuFrame.map);
-        usd.setVisible(true);
+
 
         
         if(MenuFrame.map.getCurrentShips().size() > 0){
-            ShipsPropertyDialog spd = new ShipsPropertyDialog(this, new CargoShip());
-            spd.setVisible(true);
+            UpdateShipsDialog usd = new UpdateShipsDialog(this,MenuFrame.map);
+            usd.setVisible(true);
         }
         
         else{
@@ -369,6 +368,16 @@ public class MenuFrame extends JFrame implements ActionListener{
     public void unloadShip(){
         /*Prompt the user with a dialog box, showing a list of all the ships
         safely in dock*/
+        if (!map.getPort().createUnloadableShipList(map).isEmpty())
+        {
+            SelectSafeShips unloadShip = new SelectSafeShips(this,MenuFrame.map);
+            unloadShip.setVisible(true);
+        }
+        else
+        {
+            this.messageBox.append("No Ships to unload.\n");
+        }
+        
     }
     
     public void updateDock(){
