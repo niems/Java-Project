@@ -360,6 +360,15 @@ public class MenuFrame extends JFrame implements ActionListener{
     public void unloadShip(){
         /*Prompt the user with a dialog box, showing a list of all the ships
         safely in dock*/
+        if (!map.getPort().createUnloadableShipList(map).isEmpty())
+        {
+            SelectSafeShips unloadShip = new SelectSafeShips(this,MenuFrame.map);
+            unloadShip.setVisible(true);
+        }
+        else
+        {
+            this.messageBox.append("No Ships to unload.\n");
+        }
     }
     
     public void updateDock(){
