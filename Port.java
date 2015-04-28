@@ -25,6 +25,7 @@ public class Port {
         this.name = "Liverpool";
         this.dock = new ArrayList();
         this.cargo = new ArrayList();
+        this.safeShips = new ArrayList();
     }
     
     public void updateDock(Map map){       
@@ -63,26 +64,20 @@ public class Port {
             System.out.println("An error has occurred");
         }       
     }
-    
-    public void unloadShip(Map map){
+    public ArrayList<CargoShip> createUnloadableShipList(Map map)
+    {
         this.safeShips.clear(); //clears out stale data
-        Scanner input = new Scanner(System.in);
-        int selection = 0;
-        boolean again = true; //loops if true
-        
-        try{            
-            //finds all the ships that can be unloaded
-            for(int i = 0; i < map.getCurrentShips().size(); i++){
-                for(int j = 0; j < map.getPort().getDock().size(); j++){
+        for(int i = 0; i < map.getCurrentShips().size(); i++){
+            for(int j = 0; j < map.getPort().getDock().size(); j++){
 
-                    //if the current ship is at the dock
-                    if(map.getCurrentShips().get(i).atDock(map.getPort().getDock().get(j))){
-                        //if the current ship is compatible with the dock and fits
-                        if(map.getCurrentShips().get(i).dockCompatible(map.getPort().getDock().get(j), map) &&
-                           map.getCurrentShips().get(i).shipSizeCompatible(map.getPort().getDock().get(j))){
+                //if the current ship is at the dock
+                if(map.getCurrentShips().get(i).atDock(map.getPort().getDock().get(j))){
+                    //if the current ship is compatible with the dock and fits
+                    if(map.getCurrentShips().get(i).dockCompatible(map.getPort().getDock().get(j), map) &&
+                        map.getCurrentShips().get(i).shipSizeCompatible(map.getPort().getDock().get(j))){
                             
-                            if(map.getCurrentShips().get(i).getCargo() != null) //if the cargo exists
-                                safeShips.add(map.getCurrentShips().get(i)); //ship ready to be unloaded
+                        if(map.getCurrentShips().get(i).getCargo() != null) //if the cargo exists
+                            safeShips.add(map.getCurrentShips().get(i)); //ship ready to be unloaded
                         }
 
                         else //ship is not compatible with dock
@@ -90,8 +85,21 @@ public class Port {
                     }
                 }
             }
+        return safeShips;
+        
+        
+    }
+    
+    public void unloadShip(Map map,int selection){
+        //this.safeShips.clear(); //clears out stale data
+        //Scanner input = new Scanner(System.in);
+        //int selection = 0;
+        //boolean again = true; //loops if true
+        
+        //try{            
+            //finds all the ships that can be unloaded
 
-            do{
+            /*do{
                 again = true; //reset
 
                 if(safeShips.size() > 0){ //if there are ships to unload
@@ -113,15 +121,15 @@ public class Port {
                         System.out.println("Invalid: selection out of range\n");
                     }
 
-                    else if(selection < safeShips.size()){
+                    else if(selection < safeShips.size()){*/
                         if(safeShips.get(selection).getCargo() != null){ //if the cargo for the current ship exists
                             map.getPort().getCargo().add(safeShips.get(selection).getCargo()); //adds ship cargo to the port
                             safeShips.get(selection).setCargo(null); //removes ships cargo from ship
-                            again = false;
+                            //again = false;
                         }
-                    }
+                    //}
                     
-                    else{
+                    /*else{
                         again = false; //return to previous menu
                     }
                 }
@@ -131,13 +139,13 @@ public class Port {
                     again = false; //breaks loop
                 }
 
-            }while(again == true);
+            //}while(again == true);
         
         }catch(InputMismatchException e){
             System.out.println("Invalid input");
         }catch(Exception e){
             System.out.println("An error has occurred");
-        }
+        }*/
     }
     
     public void displayAllCargo(){
@@ -210,6 +218,20 @@ public class Port {
      */
     public void setCargo(ArrayList<Cargo> cargo) {
         this.cargo = cargo;
+    }
+
+    /**
+     * @return the safeShips
+     */
+    public ArrayList<CargoShip> getSafeShips() {
+        return safeShips;
+    }
+
+    /**
+     * @param safeShips the safeShips to set
+     */
+    public void setSafeShips(ArrayList<CargoShip> safeShips) {
+        this.safeShips = safeShips;
     }
     
 }
