@@ -12,7 +12,6 @@ package pkgbyte.me;
  *
  * @author Cam
  */
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -102,9 +101,9 @@ public class SelectDocks extends JDialog implements ActionListener {
        if (command == commandOkButton)
        {
             int index = dockList.getSelectedIndex();
-            //ShipsPropertyDialog spd = new ShipsPropertyDialog(menuFrame,map.getPort().getDock().get(index));
+            DockPropertiesDialog dockProp = new DockPropertiesDialog(menuFrame,map.getPort().getDock().get(index));
             this.dispose();
-            //spd.setVisible(true);
+            dockProp.setVisible(true);
 
        }
        else if ( command == commandCancelButton)
