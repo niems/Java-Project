@@ -375,6 +375,13 @@ public class MenuFrame extends JFrame implements ActionListener{
         /*Prompt the user with a dialog box with a list item contatining the names
         of all avaialble docks. Once a dock has been selected, open a second dialog
         box that will allow the user to update the current dock properties.*/
+        if(MenuFrame.map.getPort().getDock().size() > 0){
+            SelectDocks selectDocks = new SelectDocks(this,MenuFrame.map);
+            selectDocks.setVisible(true);
+        }
+        else{
+            this.messageBox.append("No docks to update\n");
+        }
     }
     
     public void displayAllDocks(){
