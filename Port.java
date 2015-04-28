@@ -63,8 +63,91 @@ public class Port {
             System.out.println("An error has occurred");
         }       
     }
+    public ArrayList<CargoShip> createUnloadableShipList(Map map)
+    {
+        this.safeShips.clear(); //clears out stale data
+        for(int i = 0; i < map.getCurrentShips().size(); i++){
+            for(int j = 0; j < map.getPort().getDock().size(); j++){
+
+                //if the current ship is at the dock
+                if(map.getCurrentShips().get(i).atDock(map.getPort().getDock().get(j))){
+                    //if the current ship is compatible with the dock and fits
+                    if(map.getCurrentShips().get(i).dockCompatible(map.getPort().getDock().get(j), map) &&
+                        map.getCurrentShips().get(i).shipSizeCompatible(map.getPort().getDock().get(j))){
+                            
+                        if(map.getCurrentShips().get(i).getCargo() != null) //if the cargo exists
+                            safeShips.add(map.getCurrentShips().get(i)); //ship ready to be unloaded
+                        }
+
+                        else //ship is not compatible with dock
+                            break;
+                    }
+                }
+            }
+        return safeShips;
+        
+        
+    }
     
-    public void unloadShip(Map map){
+    public void unloadShip(Map map,int selection){
+        //this.safeShips.clear(); //clears out stale data
+        //Scanner input = new Scanner(System.in);
+        //int selection = 0;
+        //boolean again = true; //loops if true
+        
+        //try{            
+            //finds all the ships that can be unloaded
+
+            /*do{
+                again = true; //reset
+
+                if(safeShips.size() > 0){ //if there are ships to unload
+                    System.out.println("Unloadable ships");
+                    System.out.println("-----------------");
+
+                    //displays all ships that can be unloaded
+                    for(int i = 0; i < safeShips.size(); i++){
+                        System.out.println(String.format("%d: %s", i, safeShips.get(i).getName()));
+                    }
+                    
+                    System.out.println(String.format("%d: Previous Menu", safeShips.size()));
+
+                    System.out.print("\nEnter selection: ");
+                    System.out.flush();
+                    selection = input.nextInt();
+
+                    if(selection < 0 || selection > safeShips.size()){
+                        System.out.println("Invalid: selection out of range\n");
+                    }
+
+                    else if(selection < safeShips.size()){*/
+                        if(safeShips.get(selection).getCargo() != null){ //if the cargo for the current ship exists
+                            map.getPort().getCargo().add(safeShips.get(selection).getCargo()); //adds ship cargo to the port
+                            safeShips.get(selection).setCargo(null); //removes ships cargo from ship
+                            //again = false;
+                        }
+                    //}
+                    
+                    /*else{
+                        again = false; //return to previous menu
+                    }
+                }
+
+                else{
+                    System.out.println("No ships to unload");
+                    again = false; //breaks loop
+                }
+
+            //}while(again == true);
+        
+        }catch(InputMismatchException e){
+            System.out.println("Invalid input");
+        }catch(Exception e){
+            System.out.println("An error has occurred");
+        }*/
+    }
+    
+    /*public void unloadShip(Map map){
         this.safeShips.clear(); //clears out stale data
         Scanner input = new Scanner(System.in);
         int selection = 0;
@@ -138,7 +221,7 @@ public class Port {
         }catch(Exception e){
             System.out.println("An error has occurred");
         }
-    }
+    }*/
     
     public void displayAllCargo(){
         if(this.cargo.size() > 0){
