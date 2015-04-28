@@ -89,9 +89,6 @@ public class MenuFrame extends JFrame implements ActionListener{
         
         //creates the map and file handler to load in system files
         map = new Map();
-        //map.file = new FileHandler(map);
-        
-        
 
         //Creates the menubar to hold the menus and items
         menuBar = new JMenuBar();
@@ -146,13 +143,13 @@ public class MenuFrame extends JFrame implements ActionListener{
         this.setLayout(borderLayout);
         
         //Creates an textArea
-        messageBox = new JTextArea(8,200);//text area being created with a set size
+        messageBox = new JTextArea(8,80);//text area being created with a set size
         messageBox.setEditable(false);// makes it uneditable for the user
 
         
-        messageBox.setLineWrap(true);
+        //messageBox.setLineWrap(true);
         JScrollPane scrollbar = new JScrollPane (messageBox, 
-        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);//puts it in a scrollpane with a vertical scrollbar
+        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);//puts it in a scrollpane with a vertical scrollbar
         this.add(scrollbar,BorderLayout.SOUTH);
         
 
@@ -164,7 +161,6 @@ public class MenuFrame extends JFrame implements ActionListener{
         mapPanel = new JPanel(); //creates the panel for the map
         mapPanel.setLayout(new GridLayout(1, 1, 0, 0));
         mapPanel.setPreferredSize(new Dimension(size.height - messageBox.getHeight(), size.width ));
-        //mapPanel.setBackground(Color.CYAN);
         
        mapComponent = new MapComponent();
        mapPanel.add(mapComponent);
@@ -205,7 +201,6 @@ public class MenuFrame extends JFrame implements ActionListener{
             case commandDisplayAllShips:
                 displayAllShips();
                 break;
-
             case commandRemoveAllShips:
                 removeAllShips();
                 break;
@@ -321,7 +316,6 @@ public class MenuFrame extends JFrame implements ActionListener{
         else{
             this.messageBox.append("No ships to update.\n");
         }
-        
     }
     
 
@@ -418,6 +412,18 @@ public class MenuFrame extends JFrame implements ActionListener{
         /*Prompts the user with a dialog box, and request a number of monsters
         (sea serpents, leviathans, and krakens) to be generated. The monsters
         will then be placed on the map in the sea.*/
+        
+        if(map.getGeoStatus() != null){
+            String amount = JOptionPane.showInputDialog("Enter the number of monsters to generate: ");
+        }
+        
+        else{
+            String error = "Please load the map before trying to generate monsters.\n";
+            JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+        //call generate monsters function from map class
     }
     
     public void updateMonsters(){
