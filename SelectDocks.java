@@ -1,8 +1,19 @@
 
+
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pkgbyte.me;
 
+/**
+ *
+ * @author Cam
+ */
+import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Dialog;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -17,23 +28,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author Cam
- */
-public class SelectSafeShips extends JDialog implements ActionListener {
-
+public class SelectDocks extends JDialog implements ActionListener {
     
     public final String commandOkButton = "OK";
     public final String commandCancelButton = "Canel";
     
-    private  JList <CargoShip> safeShipList;
+    private  JList <Dock> dockList;
     private  JButton okButton;
     private  JButton cancelButton;
     private  Map map;
@@ -42,8 +42,7 @@ public class SelectSafeShips extends JDialog implements ActionListener {
     private  MenuFrame menuFrame;
     private  GridBagLayout rootLayout;
     private  GridBagConstraints positions;
-    
-    public SelectSafeShips(MenuFrame menuFrame, Map map)
+    public SelectDocks(MenuFrame menuFrame, Map map)
     {
         super(menuFrame);// sets the parent where the window will be fixed to 
         this.menuFrame = menuFrame;
@@ -55,14 +54,14 @@ public class SelectSafeShips extends JDialog implements ActionListener {
         buttonPanel = new JPanel();
 
         
-        prompt = new JLabel("Choose the ship you would like to unload.");
+        prompt = new JLabel("Choose the dock you would like to update.");
         okButton = new JButton(commandOkButton);
         okButton.addActionListener(this);
         cancelButton = new JButton(commandCancelButton);
         cancelButton.addActionListener(this);
         
-        setTitle("Unload Ships");//names the window
-        setModalityType(Dialog.ModalityType.APPLICATION_MODAL); //sets the window's modality 
+        setTitle("Update Docks");//names the window
+        setModalityType(ModalityType.APPLICATION_MODAL); //sets the window's modality 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(getParent());
         createDialog();
@@ -74,10 +73,10 @@ public class SelectSafeShips extends JDialog implements ActionListener {
         this.setLayout(rootLayout);
         this.addComponent(prompt,0,1,1,2);
         
-        safeShipList = new JList(map.getPort().createUnloadableShipList(map).toArray());
-        safeShipList.setVisibleRowCount(10);
-        safeShipList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.addComponent(new JScrollPane(safeShipList), 2,1,1,2);
+        dockList = new JList(map.getPort().getDock().toArray());
+        dockList.setVisibleRowCount(10);
+        dockList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.addComponent(new JScrollPane(dockList), 2,1,1,2);
         buttonPanel.setLayout(new GridLayout(1,2));
         buttonPanel.add(okButton);
         buttonPanel.add(cancelButton);
@@ -102,11 +101,10 @@ public class SelectSafeShips extends JDialog implements ActionListener {
        
        if (command == commandOkButton)
        {
-            int index = safeShipList.getSelectedIndex();
-            System.out.println(index);
-            System.out.println(map.getCurrentShips().toArray()[index]);
-            map.getPort().unloadShip(map, index);
+            int index = dockList.getSelectedIndex();
+            //ShipsPropertyDialog spd = new ShipsPropertyDialog(menuFrame,map.getPort().getDock().get(index));
             this.dispose();
+            //spd.setVisible(true);
 
        }
        else if ( command == commandCancelButton)
@@ -117,5 +115,4 @@ public class SelectSafeShips extends JDialog implements ActionListener {
 
     
 }
-
 

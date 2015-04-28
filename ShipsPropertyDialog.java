@@ -37,8 +37,8 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
     public final String commandShipLatitude = " Latitude ";
     public final String commandShipRow = " Row ";
     public final String commandShipCol = " Column ";
-    public final String commandShipCargo = "Cargo";
-    public final String commandShipCargoAmount = "Cargo Amount";
+    public final String commandShipCargo =  " Cargo ";
+    public final String commandShipCargoAmount = " Cargo Amount ";
     public final String prompt = "Use the textfields to\n update the ships properties.";
     public final String tag = "Ship";
 
@@ -151,18 +151,21 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
         String tempBeam;
         String tempLongitude;
         String tempLatitude ;
+        String tempCargo;
+        String tempCargoAmount;
         String tempRow ;
         String tempCol;
 
         long transponder;
-        double capcitiy, length, draft, beam, longitude, latitude;
+        double capcitiy, length, draft, beam, longitude, latitude, cargoAmount;
         int row, column;
+        boolean valid = true;
         
 
         if (source == okButton  )
         {
             
-        //try{
+            try{
                 System.out.println("Ok pushed");
 
                 tempName = this.inputName.getText();
@@ -174,12 +177,14 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
                 tempBeam = this.inputBeam.getText();
                 tempLongitude = this.inputLongitude.getText();
                 tempLatitude = this.inputLatitude.getText();
+                tempCargo = this.inputCargo.getText();
+                tempCargoAmount = this.inputCargoAmount.getText();
                 tempRow = this.inputRow.getText();
                 tempCol = this.inputCol.getText();
 
 
                 if( !tempName.isEmpty() && !tempCountry.isEmpty() && !tempTransponder.isEmpty() && !tempCapacity.isEmpty() &&
-                        !tempLength.isEmpty() && !tempDraft.isEmpty() && !tempBeam.isEmpty() && !tempLongitude.isEmpty() && !tempLatitude.isEmpty() && tempRow.isEmpty() && tempCol.isEmpty())
+                        !tempLength.isEmpty() && !tempDraft.isEmpty() && !tempBeam.isEmpty() && !tempLongitude.isEmpty() && !tempLatitude.isEmpty() && !tempCargo.isEmpty() && !tempCargoAmount.isEmpty()&& tempRow.isEmpty() && tempCol.isEmpty())
                 {
                     ship.setName(tempName);
                     ship.setCountry(tempCountry);
@@ -196,26 +201,54 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
                     longitude = Double.valueOf(tempLongitude);
                     ship.setLongitude(longitude);
                     latitude = Double.valueOf(tempLatitude);
-                    /*ship.setLatitude(latitude);
-                    row = Integer.valueOf(tempRow);
-                    ship.setLatitude(MapConverter.row2lat(row));
-                    column = Integer.valueOf(tempCol);
-                    ship.setLongitude(MapConverter.col2lon(column));*/
+                    ship.setLatitude(latitude);
+                    ship.getCargo().setDescription(tempCargo);
+                    cargoAmount = Double.valueOf(tempCargoAmount);
+                    ship.getCargo().setWeight(cargoAmount);
+
                 }
-                else
+
+                else if( !tempName.isEmpty() && !tempCountry.isEmpty() && !tempTransponder.isEmpty() && !tempCapacity.isEmpty() &&
+                        !tempLength.isEmpty() && !tempDraft.isEmpty() && !tempBeam.isEmpty() && !tempLongitude.isEmpty() && !tempLatitude.isEmpty() && !tempCargo.isEmpty() && !tempCargoAmount.isEmpty()&& !tempRow.isEmpty() && !tempCol.isEmpty())
                 {
                     String errorMessage = "The position can only be changed with the \n longitude and latitude or using row and column but not both.";
                     JOptionPane.showMessageDialog(this, errorMessage, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);   
+                    valid = false;
                 }
-
+                else if( !tempName.isEmpty() && !tempCountry.isEmpty() && !tempTransponder.isEmpty() && !tempCapacity.isEmpty() &&
+                        !tempLength.isEmpty() && !tempDraft.isEmpty() && !tempBeam.isEmpty() && tempLongitude.isEmpty() && tempLatitude.isEmpty() && !tempCargo.isEmpty() && !tempCargoAmount.isEmpty()&& !tempRow.isEmpty() && !tempCol.isEmpty())
+                 {
+                    ship.setName(tempName);
+                    ship.setCountry(tempCountry);
+                    transponder = Long.valueOf(tempTransponder);
+                    ship.setTransponder(transponder);
+                    capcitiy = Double.valueOf(tempCapacity);
+                    ship.setCapacity(capcitiy);
+                    length = Double.valueOf(tempLength);
+                    ship.setLength(length);     
+                    draft = Double.valueOf(tempDraft);
+                    ship.setDraft(draft);
+                    beam = Double.valueOf(tempBeam);
+                    ship.setBeam(beam);
+                    ship.getCargo().setDescription(tempCargo);
+                    cargoAmount = Double.valueOf(tempCargoAmount);
+                    ship.getCargo().setWeight(cargoAmount);
+                    row = Integer.valueOf(tempRow);
+                    ship.setLatitude(MapConverter.row2lat(row));
+                    column = Integer.valueOf(tempCol);
+                    ship.setLongitude(MapConverter.col2lon(column));
+                 }
                 
+                if (valid)
+                {
                     this.dispose();
-        //}
-                   /* catch (NumberFormatException  nfe)
-                    {        
-                        String errorMessage = "Please enter only integer values.";
-                        JOptionPane.showMessageDialog(this, errorMessage, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
-                    }*/
+                }
+            }     
+            catch (NumberFormatException  nfe)
+            {        
+                String errorMessage = "Please enter only integer values.";
+                JOptionPane.showMessageDialog(this, errorMessage, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
+            }
         
         }
         
