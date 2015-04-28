@@ -10,14 +10,17 @@ package pkgbyte.me;
  * @author Niems
  */
 public class SeaSerpent extends SeaMonster{
+    public static int totalCount = 0; //total sea serpent count
     
     public SeaSerpent(){
         this.position = new Position();
-        this.type = "Kraken";
+        this.label = "Kraken";
         this.count = 0;        
     }
     
     public void battleCry(){
         System.out.println("Suddenly, you hear bagpipes!");
     }
+    
+    
 }

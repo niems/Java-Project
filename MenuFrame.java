@@ -412,9 +412,13 @@ public class MenuFrame extends JFrame implements ActionListener{
         /*Prompts the user with a dialog box, and request a number of monsters
         (sea serpents, leviathans, and krakens) to be generated. The monsters
         will then be placed on the map in the sea.*/
+        int[] valid = {1, 1, 1};
         
         if(map.getGeoStatus() != null){
             String amount = JOptionPane.showInputDialog("Enter the number of monsters to generate: ");
+            map.generateSeaMonsters(amount);
+            
+            this.mapComponent.updateBaseMap(map, valid);
         }
         
         else{
@@ -439,7 +443,7 @@ public class MenuFrame extends JFrame implements ActionListener{
         
         if(MenuFrame.map.getSeamonsters().size() > 0){
             for(int i = 0; i < MenuFrame.map.getSeamonsters().size(); i++){
-                output = i + ": " + MenuFrame.map.getSeamonsters().get(i).type + "\n";
+                output = i + ": " + MenuFrame.map.getSeamonsters().get(i).label + "\n";
                 this.messageBox.append(output);
             }
         }

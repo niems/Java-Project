@@ -11,10 +11,10 @@ package pkgbyte.me;
  * @author Niems
  */
 public class Leviathan extends SeaMonster{
-    
+    public static int totalCount = 0; //total leviathan count
     public Leviathan(){
         this.position = new Position();
-        this.type = "Kraken";
+        this.label = "Kraken";
         this.count = 0;        
     }
     

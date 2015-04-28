@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -578,7 +579,87 @@ public class Map {
     /**
      * @return the seamonsters
      */
-    public void generateSeaMonsters(int size) throws NullPointerException {
+    public void generateSeaMonsters(String amount) throws NullPointerException {
+        try{
+            Kraken kraken = null;
+            SeaSerpent serpent = null;
+            Leviathan leviathan = null;
+            int monsterType = 0; //determines which monster will be created
+            
+            Random rand = new Random();
+            rand.setSeed(System.currentTimeMillis()); 
+            Position tempPosition = null;
+            int size = 0; //number of monsters to generate
+            int tempRow, tempColumn;
+            boolean valid = true; //if false, position generated for monster was invalid
+            
+            size = Integer.valueOf(amount);
+            
+            for(int i = 0; i < size; i++){ //generates monsters
+                
+                do{ 
+                    valid = true; //reset
+                    //generates the location to use for the ship
+                    tempRow = rand.nextInt(Map.mapRows);
+                    tempColumn = rand.nextInt(Map.mapCols);
+
+                    if(this.geoStatus[tempRow][tempColumn].equals(String.valueOf(this.land))){
+                        valid = false; //the monster was generated on land
+                    }
+
+                }while(valid == false); //loops until the ship isn't generated on land
+                
+                tempPosition = new Position();
+                monsterType = rand.nextInt(3);
+                
+                tempPosition.setRow(tempRow);
+                tempPosition.setColumn(tempColumn);
+                tempPosition.setLatitude(MapConverter.row2lat(tempRow));
+                tempPosition.setLongitude(MapConverter.col2lon(tempColumn));
+            
+                if(monsterType == 0){ //kraken created
+                    kraken = new Kraken();
+                    
+                    Kraken.totalCount++; //another kraken has been created(used as new count)                    
+                    kraken.setPosition(tempPosition);
+                    kraken.setCount(Kraken.totalCount);
+                    kraken.setLabel("Kraken " + String.valueOf(Kraken.totalCount));
+                    
+                    this.getSeamonsters().add(kraken);
+                }
+
+                else if(monsterType == 1){ //sea serpent created
+                    serpent = new SeaSerpent();
+                    
+                    SeaSerpent.totalCount++; //another sea serpent has been created
+                    serpent.setPosition(tempPosition);
+                    serpent.setCount(SeaSerpent.totalCount);
+                    serpent.setLabel("Sea Serpent " + String.valueOf(SeaSerpent.totalCount));
+                    
+                    this.getSeamonsters().add(serpent);
+                }
+                
+                else if(monsterType == 2){ //leviathan created
+                    leviathan = new Leviathan();
+                    
+                    Leviathan.totalCount++; //another leviathan has been created
+                    leviathan.setPosition(tempPosition);
+                    leviathan.setCount(Leviathan.totalCount);
+                    leviathan.setLabel("Leviathan " + String.valueOf(Leviathan.totalCount));
+                    
+                    this.getSeamonsters().add(leviathan);
+                }
+            }
+            
+            System.out.println("Successfully generated monsters");
+            
+        }catch(NumberFormatException e){
+            String error = "Error: Only integer types are accepted.\n";
+            JOptionPane.showMessageDialog(null, error, "Error: Invalid Type", JOptionPane.ERROR_MESSAGE);
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         /*
         if(this.geoStatus != null){
             CargoShip cargoShip = null;

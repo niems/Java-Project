@@ -120,7 +120,7 @@ public class MapComponent extends JComponent{
                         this.add(tile, removeIndex);
                     }
                     
-                    this.add(tile, removeIndex);
+                    //this.add(tile, removeIndex);
                 }
                 
                 revalidate();
@@ -153,6 +153,30 @@ public class MapComponent extends JComponent{
                 revalidate();
             }
             
+            for(int i = 0; i < map.getSeamonsters().size(); i++){
+                row = map.getSeamonsters().get(i).getPosition().getRow();
+                column = map.getSeamonsters().get(i).getPosition().getColumn();
+
+                removeIndex = (row * Map.mapCols) + column;
+                this.remove(removeIndex);
+
+                if(map.getSeamonsters().get(i).getClass() == Kraken.class){
+                    tile = new TileComponent(krakenImage);
+                    this.add(tile, removeIndex);
+                }
+
+                else if(map.getSeamonsters().get(i).getClass() == SeaSerpent.class){
+                    tile = new TileComponent(seaSerpentImage);
+                    this.add(tile, removeIndex);
+                }
+
+                else if(map.getSeamonsters().get(i).getClass() == Leviathan.class){
+                    tile = new TileComponent(leviathanImage);
+                    this.add(tile, removeIndex);
+                }
+            }
+            
+            revalidate();
             repaint();
             
         }catch(Exception e){

@@ -14,7 +14,7 @@ public class Godzilla extends SeaMonster{
     
     public Godzilla(){
         this.position = new Position();
-        this.type = "Godzilla";
+        this.label = "Godzilla";
         this.count = 0;        
     }
     
