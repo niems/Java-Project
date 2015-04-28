@@ -11,13 +11,11 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.io.FileNotFoundException;
+
 import javax.swing.JFrame;
 import javax.swing.JList;
-
 import javax.swing.JFrame;
-
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 import javax.swing.JMenuBar;
@@ -31,8 +29,8 @@ import javax.swing.JTextArea;
  * @author Cam
  */
 public class MenuFrame extends JFrame implements ActionListener{
-    
-    private static Map map; 
+
+	private static Map map; 
     
     private final JMenuBar menuBar;
     private JMenuItem menuItem; //used for all menu items
@@ -157,9 +155,8 @@ public class MenuFrame extends JFrame implements ActionListener{
         
 
         // Sets the size of the main window        
-        Dimension size = new Dimension(640,480);
+        Dimension size = new Dimension(601, 587);
         this.setPreferredSize(size);
-        //this.setSize(size);
         
         //setup for the map in the center of the window
         mapPanel = new JPanel(); //creates the panel for the map
@@ -258,15 +255,16 @@ public class MenuFrame extends JFrame implements ActionListener{
         //gets the info from the files
         String tag = JOptionPane.showInputDialog("Enter file tag: "); 
         MenuFrame.map.file = new FileHandler(map, tag); 
-        MenuFrame.map.file.loadAllFiles(MenuFrame.map);
-
-        /*
-        String fileNotFound = "The file can not be found.\n Please check if the file is in the correct directory.";
-        JOptionPane.showMessageDialog(this, fileNotFound, "Error Inproper Input", JOptionPane.PLAIN_MESSAGE);
-        */
+        int[] valid = MenuFrame.map.file.loadAllFiles(MenuFrame.map); //returns which files loaded
 
         //update graphically here
-        this.mapComponent.updateBaseMap(map);
+        if(valid[0] == 1) //only updates files if they were loaded correctly
+            this.mapComponent.updateBaseMap(map, valid);
+        
+        else{
+            String fileNotFound = "The file can not be found.\n Please check if the file is in the correct directory.";
+            JOptionPane.showMessageDialog(this, fileNotFound, "Error Improper Input", JOptionPane.PLAIN_MESSAGE);
+        }
     }
     
     public void close(){ //erases all map info
@@ -277,23 +275,43 @@ public class MenuFrame extends JFrame implements ActionListener{
         MenuFrame.map.getPort().getDock().clear(); //erases all docks
         MenuFrame.map.getPort().getCargo().clear(); //erases all cargo
         MenuFrame.map.getSeamonsters().clear(); //erases all seamonsters
-        
-        //update graphically here
+                
+        //update graphically
+        this.mapComponent.removeAll(); //removes all components from map
+        this.mapComponent.validate();
+        this.mapComponent.repaint();
     }
     
     public void snapshot(){
         /*Opens a file dialog to prompt the user for a filename and directory,
         then the program will write the current list of ships, docks, sea monsters, 
         and cargos to a file using a comma separated value format.*/
+    	
+    	if(MenuFrame.map.file != null){
+    		 String tag = JOptionPane.showInputDialog("Enter filename: ");
+    		 MenuFrame.map.file.saveAllFiles(MenuFrame.map, tag); //returns which files loaded
+    	}
+    	
+    	else{
+            String fileNotFound = "No data exists to be written to a file.\n";
+            JOptionPane.showMessageDialog(this, fileNotFound, "Missing Data", JOptionPane.PLAIN_MESSAGE);
+        }
+        
     }
     
     
     /********SHIP MENU**********/
     public void generateShips()
     {
+        int[] valid = {1,1,1};
         GenerateShipsDialog gsd = new GenerateShipsDialog(this,MenuFrame.map);
         gsd.setVisible(true);        
-
+        
+        //update graphically
+        //this.mapComponent.updateShips(map);    
+        
+        if(map.getCurrentMap() != null)
+            this.mapComponent.updateBaseMap(map, valid);
     }
     
     public void updateShips(){
@@ -303,8 +321,16 @@ public class MenuFrame extends JFrame implements ActionListener{
 
        // UpdateShipsDialog usd = new UpdateShipsDialog(this,MenuFrame.map);
         //usd.setVisible(true);
-        ShipsPropertyDialog spd = new ShipsPropertyDialog(this, new CargoShip());
-        spd.setVisible(true);
+        
+        if(MenuFrame.map.getCurrentShips().size() > 0){
+            ShipsPropertyDialog spd = new ShipsPropertyDialog(this, new CargoShip());
+            spd.setVisible(true);
+        }
+        
+        else{
+            this.messageBox.append("No ships to update.\n");
+        }
+        
     }
     
 
@@ -332,12 +358,16 @@ public class MenuFrame extends JFrame implements ActionListener{
         
         if (!MenuFrame.map.getCurrentShips().isEmpty())
         {
+            int[] valid = {1,1,1};
             MenuFrame.map.getCurrentShips().clear();
-            this.messageBox.setText("Ships have been removed.");
+            this.messageBox.setText("Ships have been removed.\n");
+            
+            if(map.getCurrentMap() != null)
+                this.mapComponent.updateBaseMap(map, valid);
         }
         else
         {
-            this.messageBox.append("No Ships to remove.");
+            this.messageBox.append("No Ships to remove.\n");
         }
     }
     
