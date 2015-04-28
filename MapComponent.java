@@ -20,8 +20,50 @@ import javax.swing.JComponent;
  */
 public class MapComponent extends JComponent{
     BufferedImage image;
+    
+    BufferedImage seaImage;
+    BufferedImage landImage;
+
+    BufferedImage dockImage;
+    BufferedImage pierImage;
+    BufferedImage craneImage;
+
+    BufferedImage cargoShipImage;
+    BufferedImage containerShipImage;
+    BufferedImage oilTankerImage;
+    BufferedImage unsafeShipImage;
+    BufferedImage unloadShipImage;
+    
+    BufferedImage godzillaImage;
+    BufferedImage krakenImage;
+    BufferedImage seaSerpentImage; 
+    BufferedImage leviathanImage;
+            
     public MapComponent(){
-        this.setLayout(new GridLayout(Map.mapRows, Map.mapCols, 0, 0));
+        try{
+            this.setLayout(new GridLayout(Map.mapRows, Map.mapCols, 0, 0));
+            
+            this.seaImage = ImageIO.read(new File("sea.png"));
+            this.landImage = ImageIO.read(new File("land.png"));
+
+            this.dockImage = ImageIO.read(new File("dock.png"));
+            this.pierImage = ImageIO.read(new File("pier.png"));
+            this.craneImage = ImageIO.read(new File("crane.png"));
+
+            this.cargoShipImage = ImageIO.read(new File("cargoship.png"));
+            this.containerShipImage = ImageIO.read(new File("containership.png"));
+            this.oilTankerImage = ImageIO.read(new File("oiltanker.png"));
+            this.unsafeShipImage = ImageIO.read(new File("unsafe.png"));
+            this.unloadShipImage = ImageIO.read(new File("safe.png"));
+            
+            this.godzillaImage = ImageIO.read(new File("godzilla.png"));
+            this.krakenImage = ImageIO.read(new File("kraken.png"));
+            this.seaSerpentImage = ImageIO.read(new File("seaserpent.png"));
+            this.leviathanImage = ImageIO.read(new File("leviathan.png"));
+            
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
     
     //updates the base layer of the map (land or sea tiles)
@@ -36,16 +78,6 @@ public class MapComponent extends JComponent{
         try{
             
             //used to tile the base of the map
-            BufferedImage seaImage = ImageIO.read(new File("sea.png"));
-            BufferedImage landImage = ImageIO.read(new File("land.png"));
-            
-            BufferedImage dockImage = ImageIO.read(new File("dock.png"));
-            BufferedImage pierImage = ImageIO.read(new File("pier.png"));
-            BufferedImage craneImage = ImageIO.read(new File("crane.png"));
-            
-            BufferedImage cargoShipImage = ImageIO.read(new File("cargoship.png"));
-            BufferedImage containerShipImage = ImageIO.read(new File("containership.png"));
-            BufferedImage oilTankerImage = ImageIO.read(new File("oiltanker.png"));
             
             for(int i = 0; i < Map.mapRows; i++){
                 
@@ -123,7 +155,9 @@ public class MapComponent extends JComponent{
             
             repaint();
             
-        }catch(IOException e){
+
+        }
+        catch(IOException e){
             e.printStackTrace();
         }
 
@@ -183,6 +217,7 @@ public class MapComponent extends JComponent{
             
             
         }catch(IOException e){
+
             e.printStackTrace();
         }
     }

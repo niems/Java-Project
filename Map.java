@@ -47,6 +47,7 @@ public class Map {
     private String[][] currentMap; //includes ship and dock locations
     private ArrayList<CargoShip> currentShips; //current ships displayed on the map
     private ArrayList<SeaMonster> seamonsters; //current seamonsters displayed on the map
+    private Godzilla godzilla; //only one godzilla is allowed on the map
     private Port port; //current port
    
     
@@ -328,7 +329,6 @@ public class Map {
 
             rand.setSeed(System.currentTimeMillis()); 
             
-            
             try{
 
                 for(i = 0; i < size; i++) { //creates the ships
@@ -578,6 +578,98 @@ public class Map {
     /**
      * @return the seamonsters
      */
+    public void generateSeaMonsters(int size) throws NullPointerException {
+        /*
+        if(this.geoStatus != null){
+            CargoShip cargoShip = null;
+            ContainerShip containerShip = null;
+            OilTanker tanker = null;
+            
+            Scanner input = new Scanner(System.in);
+            Random rand = new Random();
+            String name = new String();
+            String fName[] = {"Red", "Green", "Dark", "Light", "Day", "Night", "Savanah", "Mountain", "Captain's", "Admiral's"};
+            String lName[] = {"Buffalo", "Pastures", "Knight", "Wave", "Star", "Moon", "Lion", "Goat", "Pride", "Joy"};
+            double highLimit = 0.0, lowLimit = 0.0;
+            double latitude = 0.0, longitude = 0.0;
+
+            //int size = 0, i = 0; //number of ships to generate  
+            int tempRow = 0, tempColumn = 0; //used to determine if the ship is valid(not on land)
+            int shipType = 0; //determines which ship type to generate
+            boolean valid = true; //true if the ship isn't generated on land
+            int i = 0;
+
+            rand.setSeed(System.currentTimeMillis()); 
+            
+            try{
+
+                for(i = 0; i < size; i++) { //creates the ships
+
+                    do{ 
+                        valid = true; //reset
+                        //generates the location to use for the ship
+                        tempRow = rand.nextInt(this.mapRows);
+                        tempColumn = rand.nextInt(this.mapCols);
+                        
+                        latitude = MapConverter.row2lat(tempRow);
+                        longitude = MapConverter.col2lon(tempColumn);
+                                                                           
+                        if(this.geoStatus[tempRow][tempColumn].equals(String.valueOf(this.land))){
+                            valid = false; //the ship was generated on land
+                        }
+
+                    }while(valid == false); //loops until the ship isn't generated on land
+                    
+                    shipType = rand.nextInt(3); //new ship type generated each iteration
+                    name = fName[rand.nextInt(10)] + " " + lName[rand.nextInt(10)]; //generates new ship name
+                    int randomNum = rand.nextInt((9000000 - 1000000) + 1) + 1000000;
+                    
+                    if(shipType == 0){
+                        cargoShip = new CargoShip(); //memory for new ship
+                        cargoShip.setName(name);
+                        cargoShip.setTransponder(randomNum); //generates new transponder number
+                        cargoShip.setLatitude(latitude);
+                        cargoShip.setLongitude(longitude);
+                        cargoShip.setRow(tempRow);
+                        cargoShip.setColumn(tempColumn);
+                        this.currentShips.add(cargoShip);
+                    }
+                    else if(shipType == 1){
+                        containerShip = new ContainerShip();
+                        containerShip.setName(name);
+                        containerShip.setTransponder(randomNum); //generates new transponder number 
+                        containerShip.setLatitude(latitude);
+                        containerShip.setLongitude(longitude);
+                        containerShip.setRow(tempRow);
+                        containerShip.setColumn(tempColumn);
+                        this.currentShips.add(containerShip);
+                        
+                    }
+                    else if(shipType >= 2){
+                        tanker = new OilTanker();
+                        tanker.setName(name);
+                        tanker.setTransponder(randomNum); //generates new transponder number
+                        tanker.setLatitude(latitude);
+                        tanker.setLongitude(longitude);
+                        tanker.setRow(tempRow);
+                        tanker.setColumn(tempColumn);
+                        this.currentShips.add(tanker);
+                    }
+                }
+                
+                System.out.println("Ships successfully generated.");
+            }catch(InputMismatchException e){
+                System.out.println("Invalid input given.");
+            }catch(Exception e) {
+                System.out.println("An error occurred D:");
+            }
+        }
+        else{
+            System.out.println("The map must be loaded before trying to generate ships.");
+        }
+        */
+    }
+    
     public ArrayList<SeaMonster> getSeamonsters() {
         return seamonsters;
     }
