@@ -37,7 +37,9 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
     public final String commandShipLatitude = " Latitude ";
     public final String commandShipRow = " Row ";
     public final String commandShipCol = " Column ";
-    public final String prompt = "Use the textfields to update the ships properties.";
+    public final String commandShipCargo = "Cargo";
+    public final String commandShipCargoAmount = "Cargo Amount";
+    public final String prompt = "Use the textfields to\n update the ships properties.";
     public final String tag = "Ship";
 
     private GridBagLayout rootLayout; // layout to hold all the components
@@ -57,6 +59,8 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
     JTextField inputLatitude;
     JTextField inputRow;
     JTextField inputCol;
+    JTextField inputCargo;
+    JTextField inputCargoAmount;
     private CargoShip ship;
     
 
@@ -89,8 +93,10 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
         inputDraft = makeTextField(commandShipDraft,7);
         inputLongitude = makeTextField(commandShipLongitude,8);
         inputLatitude = makeTextField(commandShipLatitude,9);
-        inputRow = makeTextField(commandShipRow,10);
-        inputCol = makeTextField(commandShipCol,11);
+        inputCargo = makeTextField(commandShipCargo,10);
+        inputCargoAmount = makeTextField(commandShipCargoAmount,11);
+        inputRow = makeTextField(commandShipRow,12);
+        inputCol = makeTextField(commandShipCol,13);
 
         //creates the buttons
         okButton = new JButton(commandOkButton);
@@ -103,7 +109,7 @@ public class ShipsPropertyDialog extends JDialog implements ActionListener{
         
 
         pack();
-        setResizable(false); 
+        //setResizable(false); 
         setModalityType(ModalityType.APPLICATION_MODAL); //sets the window's modality 
         setTitle("Ship Properties"); //names the window
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);// closes the window if the x is clicked

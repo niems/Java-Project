@@ -6,15 +6,16 @@
  */
 package pkgbyte.me;
 
+
 /**
  *
  * @author Niems
  */
 public class Leviathan extends SeaMonster{
-    
+    public static int totalCount = 0; //total leviathan count
     public Leviathan(){
         this.position = new Position();
-        this.type = "Kraken";
+        this.label = "Leviathan";
         this.count = 0;        
     }
     
@@ -22,4 +23,3 @@ public class Leviathan extends SeaMonster{
         System.out.println("Come! Ahab beckons!");
     }
 }
-

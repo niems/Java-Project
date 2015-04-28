@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -578,100 +579,105 @@ public class Map {
     /**
      * @return the seamonsters
      */
-    public void generateSeaMonsters(int size) throws NullPointerException {
-        /*
-        if(this.geoStatus != null){
-            CargoShip cargoShip = null;
-            ContainerShip containerShip = null;
-            OilTanker tanker = null;
+   public void generateSeaMonsters(String amount) throws NullPointerException {
+        try{
+            Kraken kraken = null;
+            SeaSerpent serpent = null;
+            Leviathan leviathan = null;
+            int monsterType = 0; //determines which monster will be created
             
-            Scanner input = new Scanner(System.in);
             Random rand = new Random();
-            String name = new String();
-            String fName[] = {"Red", "Green", "Dark", "Light", "Day", "Night", "Savanah", "Mountain", "Captain's", "Admiral's"};
-            String lName[] = {"Buffalo", "Pastures", "Knight", "Wave", "Star", "Moon", "Lion", "Goat", "Pride", "Joy"};
-            double highLimit = 0.0, lowLimit = 0.0;
-            double latitude = 0.0, longitude = 0.0;
-
-            //int size = 0, i = 0; //number of ships to generate  
-            int tempRow = 0, tempColumn = 0; //used to determine if the ship is valid(not on land)
-            int shipType = 0; //determines which ship type to generate
-            boolean valid = true; //true if the ship isn't generated on land
-            int i = 0;
-
             rand.setSeed(System.currentTimeMillis()); 
+            Position tempPosition = null;
+            int size = 0; //number of monsters to generate
+            int tempRow, tempColumn;
+            boolean valid = true; //if false, position generated for monster was invalid
             
-            try{
+            size = Integer.valueOf(amount);
+            
+            for(int i = 0; i < size; i++){ //generates monsters
+                
+                do{ 
+                    valid = true; //reset
+                    //generates the location to use for the ship
+                    tempRow = rand.nextInt(Map.mapRows);
+                    tempColumn = rand.nextInt(Map.mapCols);
 
-                for(i = 0; i < size; i++) { //creates the ships
+                    if(this.geoStatus[tempRow][tempColumn].equals(String.valueOf(this.land))){
+                        valid = false; //the monster was generated on land
+                    }
 
-                    do{ 
-                        valid = true; //reset
-                        //generates the location to use for the ship
-                        tempRow = rand.nextInt(this.mapRows);
-                        tempColumn = rand.nextInt(this.mapCols);
-                        
-                        latitude = MapConverter.row2lat(tempRow);
-                        longitude = MapConverter.col2lon(tempColumn);
-                                                                           
-                        if(this.geoStatus[tempRow][tempColumn].equals(String.valueOf(this.land))){
-                            valid = false; //the ship was generated on land
-                        }
-
-                    }while(valid == false); //loops until the ship isn't generated on land
+                }while(valid == false); //loops until the ship isn't generated on land
+                
+                tempPosition = new Position();
+                monsterType = rand.nextInt(3);
+                
+                tempPosition.setRow(tempRow);
+                tempPosition.setColumn(tempColumn);
+                tempPosition.setLatitude(MapConverter.row2lat(tempRow));
+                tempPosition.setLongitude(MapConverter.col2lon(tempColumn));
+            
+                if(monsterType == 0){ //kraken created
+                    kraken = new Kraken();
                     
-                    shipType = rand.nextInt(3); //new ship type generated each iteration
-                    name = fName[rand.nextInt(10)] + " " + lName[rand.nextInt(10)]; //generates new ship name
-                    int randomNum = rand.nextInt((9000000 - 1000000) + 1) + 1000000;
+                    Kraken.totalCount++; //another kraken has been created(used as new count)                    
+                    kraken.setPosition(tempPosition);
+                    kraken.setCount(Kraken.totalCount);
+                    kraken.setLabel("Kraken " + String.valueOf(Kraken.totalCount));
                     
-                    if(shipType == 0){
-                        cargoShip = new CargoShip(); //memory for new ship
-                        cargoShip.setName(name);
-                        cargoShip.setTransponder(randomNum); //generates new transponder number
-                        cargoShip.setLatitude(latitude);
-                        cargoShip.setLongitude(longitude);
-                        cargoShip.setRow(tempRow);
-                        cargoShip.setColumn(tempColumn);
-                        this.currentShips.add(cargoShip);
-                    }
-                    else if(shipType == 1){
-                        containerShip = new ContainerShip();
-                        containerShip.setName(name);
-                        containerShip.setTransponder(randomNum); //generates new transponder number 
-                        containerShip.setLatitude(latitude);
-                        containerShip.setLongitude(longitude);
-                        containerShip.setRow(tempRow);
-                        containerShip.setColumn(tempColumn);
-                        this.currentShips.add(containerShip);
-                        
-                    }
-                    else if(shipType >= 2){
-                        tanker = new OilTanker();
-                        tanker.setName(name);
-                        tanker.setTransponder(randomNum); //generates new transponder number
-                        tanker.setLatitude(latitude);
-                        tanker.setLongitude(longitude);
-                        tanker.setRow(tempRow);
-                        tanker.setColumn(tempColumn);
-                        this.currentShips.add(tanker);
-                    }
+                    this.getSeamonsters().add(kraken);
+                }
+
+                else if(monsterType == 1){ //sea serpent created
+                    serpent = new SeaSerpent();
+                    
+                    SeaSerpent.totalCount++; //another sea serpent has been created
+                    serpent.setPosition(tempPosition);
+                    serpent.setCount(SeaSerpent.totalCount);
+                    serpent.setLabel("Sea Serpent " + String.valueOf(SeaSerpent.totalCount));
+                    
+                    this.getSeamonsters().add(serpent);
                 }
                 
-                System.out.println("Ships successfully generated.");
-            }catch(InputMismatchException e){
-                System.out.println("Invalid input given.");
-            }catch(Exception e) {
-                System.out.println("An error occurred D:");
+                else if(monsterType == 2){ //leviathan created
+                    leviathan = new Leviathan();
+                    
+                    Leviathan.totalCount++; //another leviathan has been created
+                    leviathan.setPosition(tempPosition);
+                    leviathan.setCount(Leviathan.totalCount);
+                    leviathan.setLabel("Leviathan " + String.valueOf(Leviathan.totalCount));
+                    
+                    this.getSeamonsters().add(leviathan);
+                }
             }
+            
+            System.out.println("Successfully generated monsters");
+            
+        }catch(NumberFormatException e){
+            String error = "Error: Only integer types are accepted.\n";
+            JOptionPane.showMessageDialog(null, error, "Error: Invalid Type", JOptionPane.ERROR_MESSAGE);
+            
+        }catch(Exception e){
+            e.printStackTrace();
         }
-        else{
-            System.out.println("The map must be loaded before trying to generate ships.");
-        }
-        */
     }
     
+    public void generateGodzilla() throws NullPointerException{
+        this.godzilla = new Godzilla();
+        
+    }
     public ArrayList<SeaMonster> getSeamonsters() {
         return seamonsters;
+    }
+     public Godzilla getGodzilla() {
+        return godzilla;
+    }
+
+    /**
+     * @param godzilla the godzilla to set
+     */
+    public void setGodzilla(Godzilla godzilla) {
+        this.godzilla = godzilla;
     }
 
     /**

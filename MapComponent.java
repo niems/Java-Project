@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -120,7 +121,7 @@ public class MapComponent extends JComponent{
                         this.add(tile, removeIndex);
                     }
                     
-                    this.add(tile, removeIndex);
+                    //this.add(tile, removeIndex);
                 }
                 
                 revalidate();
@@ -153,71 +154,33 @@ public class MapComponent extends JComponent{
                 revalidate();
             }
             
-            repaint();
-            
+            for(int i = 0; i < map.getSeamonsters().size(); i++){
+                row = map.getSeamonsters().get(i).getPosition().getRow();
+                column = map.getSeamonsters().get(i).getPosition().getColumn();
 
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
+                removeIndex = (row * Map.mapCols) + column;
+                this.remove(removeIndex);
 
-    }
-    
-    public void updateShips(Map map){
-        TileComponent tile = null;
-        int removeIndex, row, column; //index to remove from the map
-        
-        try{
-            BufferedImage cargoShipImage = ImageIO.read(new File("cargoship.png"));
-            BufferedImage containerShipImage = ImageIO.read(new File("containership.png"));
-            BufferedImage oilTankerImage = ImageIO.read(new File("oiltanker.png"));
-            BufferedImage unsafeShipImage = ImageIO.read(new File("unsafe.png"));
-            BufferedImage unloadShipImage = ImageIO.read(new File("safe.png"));
-            
-            for(int i = 0; i < map.getCurrentShips().size(); i++){
-                row = map.getCurrentShips().get(i).getRow();
-                column = map.getCurrentShips().get(i).getColumn();
-                
-                removeIndex = (row * Map.mapCols) + column; //current dock location
-                this.remove(removeIndex); //removes current component
-                
-                //if the ship is unsafe
-                if(map.getCurrentMap()[row][column].equals(String.valueOf(map.getUnsafeShip()))){
-                    tile = new TileComponent(unsafeShipImage);
+                if(map.getSeamonsters().get(i).getClass() == Kraken.class){
+                    tile = new TileComponent(krakenImage);
                     this.add(tile, removeIndex);
                 }
-                
-                //if the ship is at the correct type of dock and is ready to be unloaded
-                else if(map.getCurrentMap()[row][column].equals(String.valueOf(map.getShipReadyToUnload()))){
-                    tile = new TileComponent(unloadShipImage);
+
+                else if(map.getSeamonsters().get(i).getClass() == SeaSerpent.class){
+                    tile = new TileComponent(seaSerpentImage);
                     this.add(tile, removeIndex);
                 }
-                
-                //if the ship is safe at sea and is a cargo ship
-                else if(map.getCurrentMap()[row][column].equals(String.valueOf(map.getCargoShipSafeAtSea()))){
-                    tile = new TileComponent(cargoShipImage);
-                    this.add(tile, removeIndex);
-                }
-                
-                //if the ship is safe at sea and is a container ship
-                else if(map.getCurrentMap()[row][column].equals(String.valueOf(map.getContainerShipSafeAtSea()))){
-                    tile = new TileComponent(containerShipImage);
-                    this.add(tile, removeIndex);
-                }
-                
-                //if the ship is safe at sea and is a oil tanker
-                else if(map.getCurrentMap()[row][column].equals(String.valueOf(map.getTankerSafeAtSea()))){
-                    tile = new TileComponent(oilTankerImage);
+
+                else if(map.getSeamonsters().get(i).getClass() == Leviathan.class){
+                    tile = new TileComponent(leviathanImage);
                     this.add(tile, removeIndex);
                 }
             }
             
-            validate();
-            //repaint();
+            revalidate();
+            repaint();
             
-            
-        }catch(IOException e){
-
+        }catch(Exception e){
             e.printStackTrace();
         }
     }
@@ -241,3 +204,4 @@ public class MapComponent extends JComponent{
     } 
     
 }
+

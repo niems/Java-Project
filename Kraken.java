@@ -11,10 +11,11 @@ package pkgbyte.me;
  * @author Niems
  */
 public class Kraken extends SeaMonster{
+    public static int totalCount = 0; //total kraken count
     
     public Kraken(){
         this.position = new Position();
-        this.type = "Kraken";
+        this.label = "Kraken";
         this.count = 0;        
     }
     
