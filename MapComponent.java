@@ -74,6 +74,7 @@ public class MapComponent extends JComponent{
         
         TileComponent tile = null;
         int removeIndex, row, column; //index to remove from the map
+        int shipState; //determines if the ship is safe
         
         try{
             
@@ -131,23 +132,39 @@ public class MapComponent extends JComponent{
                     row = map.getCurrentShips().get(i).getRow();
                     column = map.getCurrentShips().get(i).getColumn();
                     
+                    shipState = map.getCurrentShips().get(i).safe(i, map);
+                    
                     removeIndex = (row * Map.mapCols) + column;
                     this.remove(removeIndex);
                     
-                    if(map.getCurrentShips().get(i).getSymbol() == map.getCargoShipSafeAtSea()){
-                        tile = new TileComponent(cargoShipImage);
+                    if(shipState == Map.stateUnsafe){
+                        tile = new TileComponent(unsafeShipImage);
                         this.add(tile, removeIndex);
                     }
                     
-                    else if(map.getCurrentShips().get(i).getSymbol() == map.getContainerShipSafeAtSea()){
-                        tile = new TileComponent(containerShipImage);
+                    else if(shipState == Map.stateSafeAtDock){
+                        tile = new TileComponent(unloadShipImage);
                         this.add(tile, removeIndex);
                     }
                     
-                    else if(map.getCurrentShips().get(i).getSymbol() == map.getTankerSafeAtSea()){
-                        tile = new TileComponent(oilTankerImage);
-                        this.add(tile, removeIndex);
+                    else if(shipState == Map.stateSafeAtSea){
+                        if(map.getCurrentShips().get(i).getSymbol() == map.getCargoShipSafeAtSea()){
+                            tile = new TileComponent(cargoShipImage);
+                            this.add(tile, removeIndex);
+                        }
+
+                        else if(map.getCurrentShips().get(i).getSymbol() == map.getContainerShipSafeAtSea()){
+                            tile = new TileComponent(containerShipImage);
+                            this.add(tile, removeIndex);
+                        }
+
+                        else if(map.getCurrentShips().get(i).getSymbol() == map.getTankerSafeAtSea()){
+                            tile = new TileComponent(oilTankerImage);
+                            this.add(tile, removeIndex);
+                        }
                     }
+                    
+                    
                 }
                 
                 revalidate();

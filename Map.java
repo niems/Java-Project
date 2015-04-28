@@ -281,8 +281,6 @@ public class Map {
         this.currentShips = currentShips;
     }
     
-    
-    
 
     public void generateShips(int size) throws NullPointerException {
 

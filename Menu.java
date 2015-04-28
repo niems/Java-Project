@@ -414,7 +414,7 @@ public class Menu {
                         map.getPort().updateDock(map);                        
                         break;
                     case "2": //unload ship
-                       map.getPort().unloadShip(map);
+                       //map.getPort().unloadShip(map);
                         break;
                     case "3":
                         map.getPort().displayAllCargo();
