@@ -48,7 +48,7 @@ public class Map {
     private String[][] currentMap; //includes ship and dock locations
     private ArrayList<CargoShip> currentShips; //current ships displayed on the map
     private ArrayList<SeaMonster> seamonsters; //current seamonsters displayed on the map
-    private Godzilla godzilla; //only one godzilla is allowed on the map
+    private static Godzilla godzilla; //only one godzilla is allowed on the map
     private Port port; //current port
    
     
@@ -56,12 +56,12 @@ public class Map {
         this.port = new Port();
         this.currentShips = new ArrayList();
         this.seamonsters = new ArrayList();
+        this.godzilla = null;
+        
         this.file = null;
         this.menu = new Menu();
         this.water = '.';
         this.land = '*';
-        //this.mapRows = 36;
-        //this.mapCols = 54; 
         this.geoStatus = null;
         this.currentMap = null;
         
@@ -238,29 +238,6 @@ public class Map {
     public void setUnsafeShip(char unsafeShip) {
         this.unsafeShip = unsafeShip;
     }
-
-    /**
-     * @return the mapRows
-     */
-    /*
-    public int getMapRows() {
-        return this.mapRows;
-    }
-
-    
-    public void setMapRows(int mapRows) {
-        this.mapRows = mapRows;
-    } 
-
-    
-    public int getMapCols() {
-        return this.mapCols;
-    }
-
-    
-    public void setMapCols(int mapCols) {
-        this.mapCols = mapCols;
-    } */
 
     /**
      * @return the geoStatus
@@ -665,6 +642,19 @@ public class Map {
     public void generateGodzilla() throws NullPointerException{
         this.godzilla = new Godzilla();
         
+        Random rand = new Random();
+        rand.setSeed(System.currentTimeMillis()); 
+        Position tempPosition = new Position();
+        int tempRow, tempColumn;
+
+       tempRow = rand.nextInt(Map.mapRows);
+       tempColumn = rand.nextInt(Map.mapCols);
+       tempPosition.setRow(tempRow);
+       tempPosition.setColumn(tempColumn);
+       tempPosition.setLatitude(MapConverter.row2lat(tempRow));
+       tempPosition.setLongitude(MapConverter.col2lon(tempColumn));
+       this.godzilla.setPosition(tempPosition);
+       this.godzilla.setLabel("Godzilla");
     }
     
     public ArrayList<SeaMonster> getSeamonsters() {

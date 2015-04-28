@@ -14,7 +14,7 @@ public class Leviathan extends SeaMonster{
     public static int totalCount = 0; //total leviathan count
     public Leviathan(){
         this.position = new Position();
-        this.label = "Kraken";
+        this.label = "";
         this.count = 0;        
     }
     

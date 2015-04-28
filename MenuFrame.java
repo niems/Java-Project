@@ -458,6 +458,10 @@ public class MenuFrame extends JFrame implements ActionListener{
                 output = i + ": " + MenuFrame.map.getSeamonsters().get(i).label + "\n";
                 this.messageBox.append(output);
             }
+            
+            if(MenuFrame.map.getGodzilla() != null){
+                this.messageBox.append(map.getGodzilla().getLabel() + "\n");
+            }
         }
         
         else{
@@ -473,8 +477,20 @@ public class MenuFrame extends JFrame implements ActionListener{
         
         if(MenuFrame.map.getSeamonsters().size() > 0){
             MenuFrame.map.getSeamonsters().clear();
+            
+            Kraken.totalCount = 0;
+            SeaSerpent.totalCount = 0;
+            Leviathan.totalCount = 0;
+            
             this.mapComponent.updateBaseMap(map, valid);
+            
             this.messageBox.append("Sea monsters successfully removed.\n");
+            
+        }
+        
+        if(map.getGodzilla() != null){
+            map.setGodzilla(null);    
+            this.mapComponent.updateBaseMap(map, valid);
         }
         
         else{
@@ -487,10 +503,19 @@ public class MenuFrame extends JFrame implements ActionListener{
     public void summonGodzilla(){
         /*Put Godzilla on the map. Prompt the user for the location of where Godzilla
         would appear. Godzilla, being an amphibian, can be on either land or water.*/
+       int[] valid = {1,1,1};
+       
+       if(map.getGeoStatus() != null){
+           map.generateGodzilla();
+            this.mapComponent.updateBaseMap(map, valid);
+       }
+       
+       else{           
+           String error = "Please load the map before trying to generate monsters.\n";
+           JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
+       }
         
-        if(map.getGodzilla() == null){
-            
-        }
+        
     }
     
     /*********ABOUT***************/

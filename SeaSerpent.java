@@ -14,7 +14,7 @@ public class SeaSerpent extends SeaMonster{
     
     public SeaSerpent(){
         this.position = new Position();
-        this.label = "Kraken";
+        this.label = "";
         this.count = 0;        
     }
     

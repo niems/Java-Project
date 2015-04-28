@@ -176,6 +176,17 @@ public class MapComponent extends JComponent{
                 }
             }
             
+            if(map.getGodzilla() != null){
+                row = map.getGodzilla().getPosition().getRow();
+                column = map.getGodzilla().getPosition().getColumn();
+                
+                removeIndex = (row * Map.mapCols) + column;
+                this.remove(removeIndex);
+                
+                tile = new TileComponent(godzillaImage);
+                this.add(tile, removeIndex);
+            }
+            
             revalidate();
             repaint();
             

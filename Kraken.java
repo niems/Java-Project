@@ -15,7 +15,7 @@ public class Kraken extends SeaMonster{
     
     public Kraken(){
         this.position = new Position();
-        this.label = "Kraken";
+        this.label = "";
         this.count = 0;        
     }
     
